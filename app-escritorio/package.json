@@ -1,7 +1,7 @@
 {
   "name": "indicador-temblores-escritorio",
   "productName": "Indicador de temblores",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Indicador de temblores · USFX: app de escritorio para Windows",
   "main": "main.js",
   "author": "Paul Alejandro Guzmán Calle",

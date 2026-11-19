@@ -11,7 +11,7 @@ const REMOTO = 'https://panel-sensor-agua.vercel.app';
 const RAIZ_PANEL = path.join(__dirname, 'panel');
 const ICONO = path.join(__dirname, 'build', 'icon.ico');
 const ORIGENES_CONFIABLES = new Set([REMOTO, 'app://panel']);
-const PERMISOS = new Set(['serial', 'notifications', 'fullscreen', 'clipboard-sanitized-write', 'clipboard-read', 'media']);
+const PERMISOS = new Set(['serial', 'notifications', 'fullscreen', 'screen-wake-lock', 'clipboard-sanitized-write', 'clipboard-read', 'media']);
 
 protocol.registerSchemesAsPrivileged([
   { scheme: 'app', privileges: { standard: true, secure: true, supportFetchAPI: true, corsEnabled: true, stream: true } },

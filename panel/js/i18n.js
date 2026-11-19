@@ -90,6 +90,7 @@ const DIN = {
   'Modo texto.': 'Text mode.',
   'Umbrales por defecto restaurados.': 'Default thresholds restored.',
   'Simulador: comandos d, t, v, r, m, b, u10,16,23,31,40': 'Simulator: commands d, t, v, r, m, b, u10,16,23,31,40',
+  'La pantalla no se apagará mientras transmitas.': 'The screen will not turn off while you broadcast.',
   'Sin datos': 'No data',
   'Nivel': 'Level',
   'Avisos activados': 'Alerts on',

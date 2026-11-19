@@ -9,7 +9,7 @@ const NUCLEO = [
   'css/styles.css',
   'js/main.js', 'js/app.js', 'js/alarm.js', 'js/alertas.js', 'js/chart.js', 'js/detector.js', 'js/extras.js',
   'js/i18n.js', 'js/i18n-en.js', 'js/protocol.js', 'js/proyecto.js', 'js/proyector.js', 'js/publisher.js',
-  'js/remote.js', 'js/serial.js', 'js/simulator.js', 'js/store.js', 'js/util.js',
+  'js/remote.js', 'js/wakelock.js', 'js/serial.js', 'js/simulator.js', 'js/store.js', 'js/util.js',
   'js/views/activo.js', 'js/views/prueba.js',
   'img/usfx-oscuro.png', 'img/usfx-claro.png', 'img/firma.png', 'img/qr.png',
   'icon-192.png', 'icon-512.png', 'favicon.ico',

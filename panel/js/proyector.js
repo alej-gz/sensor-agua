@@ -2,6 +2,7 @@
 
 import { $ } from './util.js';
 import { t } from './i18n.js';
+import { pantallaActiva } from './wakelock.js';
 
 export function initProyector() {
   const raiz = document.documentElement;
@@ -19,6 +20,7 @@ export function initProyector() {
     window.scrollTo(0, 0);
     raiz.requestFullscreen?.().catch(() => {});
     btn.setAttribute('aria-pressed', 'true');
+    pantallaActiva('proyector', true);
     salir.focus({ preventScroll: true });
   }
 
@@ -26,6 +28,7 @@ export function initProyector() {
     delete raiz.dataset.proyector;
     salir.hidden = true;
     btn.setAttribute('aria-pressed', 'false');
+    pantallaActiva('proyector', false);
     if (document.fullscreenElement) document.exitFullscreen().catch(() => {});
   }
 

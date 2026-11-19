@@ -8,6 +8,7 @@ import { RemoteSource } from './remote.js';
 import { Publicador } from './publisher.js';
 import './extras.js';
 import { initAlertas } from './alertas.js';
+import { pantallaActiva, soportado as hayWakeLock } from './wakelock.js';
 import { initProyector } from './proyector.js';
 import { initProyecto } from './proyecto.js';
 import { t, lang, aplicarIdioma, alternarIdioma } from './i18n.js';
@@ -162,10 +163,12 @@ $('btn-live').addEventListener('click', () => {
     pub.detener();
     aviso('Transmisión detenida. Los visitantes ya no reciben datos.', '', 5000);
   } else if (pub.iniciar()) {
-    aviso('Transmitiendo en vivo: quien abra el enlace o el QR verá lo que registra tu sensor.', 'ok', 6000);
+    aviso(`${t('Transmitiendo en vivo: quien abra el enlace o el QR verá lo que registra tu sensor.')}${hayWakeLock ? ' ' + t('La pantalla no se apagará mientras transmitas.') : ''}`, 'ok', 7000);
   }
 });
 pub.addEventListener('cambio', pintarConexion);
+// Mientras se transmite, la pantalla no se apaga
+pub.addEventListener('cambio', () => pantallaActiva('transmision', pub.activo));
 pub.addEventListener('fallo', (e) => aviso(e.detail, 'error', 0));
 
 $('btn-disconnect').addEventListener('click', desconectar);

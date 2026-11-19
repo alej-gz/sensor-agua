@@ -785,3 +785,27 @@ html[data-texto-grande] body { zoom: 1.12; }
 
 /* La cabecera (y la barra de pestanas que lleva dentro en el celular) va por encima del contenido */
 .topbar { z-index: 40; }
+
+/* ============ Barra inferior del celular: color propio por tema, translucida y un poco mas baja ============ */
+:root { --nav-bg: rgba(168, 90, 104, .84); --nav-ink: #ffffff; --nav-sel: rgba(255, 255, 255, .22); --nav-line: #ffffff; --nav-borde: rgba(255, 255, 255, .22); }
+[data-theme="dog"] { --nav-bg: rgba(112, 52, 44, .84); --nav-ink: #F0E6D8; --nav-sel: rgba(240, 230, 216, .17); --nav-line: #D4B896; --nav-borde: rgba(212, 184, 150, .28); }
+[data-theme="cmih"] { --nav-bg: rgba(24, 110, 126, .8); --nav-ink: #F5E6C8; --nav-sel: rgba(245, 230, 200, .17); --nav-line: #E6C27A; --nav-borde: rgba(230, 194, 122, .3); }
+
+@media (max-width: 760px) {
+  .tabs, .topbar:not(.menu-open) .tabs {
+    padding: 3px 6px calc(3px + env(safe-area-inset-bottom)); gap: 3px;
+    background: var(--nav-bg); border-top: 1px solid var(--nav-borde);
+    -webkit-backdrop-filter: blur(14px) saturate(1.25); backdrop-filter: blur(14px) saturate(1.25);
+  }
+  .tabs button, .topbar.menu-open .tabs button { min-height: 48px; padding: 5px 4px; gap: 3px; font-size: 11.5px; color: var(--nav-ink); opacity: .78; }
+  .tab-ico { width: 20px; height: 20px; }
+  .tabs button[aria-selected="true"] { background: var(--nav-sel); color: var(--nav-ink); opacity: 1; box-shadow: inset 0 3px 0 var(--nav-line); }
+  .player { bottom: calc(64px + env(safe-area-inset-bottom)); }
+  .theme-btn { bottom: calc(130px + env(safe-area-inset-bottom)); }
+  main { padding-bottom: 150px; }
+  .pie { padding-bottom: 140px; }
+}
+/* Sin desenfoque cuando se pidio reducir efectos (rendimiento) */
+html[data-sin-particulas] .tabs { -webkit-backdrop-filter: none; backdrop-filter: none; }
+
+html[data-sin-particulas] .player { background: var(--surface); }

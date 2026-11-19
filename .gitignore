@@ -15,3 +15,8 @@ respaldo_informes/
 
 .vercel
 .env*
+
+# App de escritorio: los .exe y las dependencias se generan con app-escritorio/construir.ps1
+app-escritorio/node_modules/
+app-escritorio/dist/
+*.exe

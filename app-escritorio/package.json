@@ -1,0 +1,52 @@
+{
+  "name": "indicador-temblores-escritorio",
+  "productName": "Indicador de temblores",
+  "version": "1.0.0",
+  "description": "Indicador de temblores · USFX: app de escritorio para Windows",
+  "main": "main.js",
+  "author": "Paul Alejandro Guzmán Calle",
+  "license": "UNLICENSED",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --win"
+  },
+  "devDependencies": {
+    "electron": "45.4.1",
+    "electron-builder": "26.18.0"
+  },
+  "build": {
+    "appId": "app.vercel.panel-sensor-agua",
+    "productName": "Indicador de temblores",
+    "copyright": "Paul Alejandro Guzmán Calle",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "panel/**/*",
+      "build/icon.ico"
+    ],
+    "asar": true,
+    "win": {
+      "icon": "build/icon.ico",
+      "target": [
+        "portable",
+        "nsis"
+      ],
+      "signExecutable": false
+    },
+    "portable": {
+      "artifactName": "Indicador-de-temblores-portable.exe"
+    },
+    "nsis": {
+      "artifactName": "Indicador-de-temblores-instalador.exe",
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Indicador de temblores"
+    }
+  }
+}

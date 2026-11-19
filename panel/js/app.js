@@ -132,6 +132,8 @@ function registrarServiceWorker() {
   });
 }
 
+if (/Electron/i.test(navigator.userAgent)) document.addEventListener('DOMContentLoaded', () => $('pie-descarga')?.setAttribute('hidden', ''));
+
 let arrancado = false;
 function arrancar() {
   if (arrancado) return;

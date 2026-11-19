@@ -809,3 +809,9 @@ html[data-texto-grande] body { zoom: 1.12; }
 html[data-sin-particulas] .tabs { -webkit-backdrop-filter: none; backdrop-filter: none; }
 
 html[data-sin-particulas] .player { background: var(--surface); }
+
+
+/* ---- Descarga de la app para Windows (solo en pantallas grandes) ---- */
+.pie-descarga { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px; margin: 6px 0 0; font-size: 13.5px; color: var(--muted); }
+.pie-descarga svg { flex: none; color: var(--accent-text); }
+@media (max-width: 760px) { .pie-descarga { display: none; } }

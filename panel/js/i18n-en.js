@@ -1,5 +1,8 @@
 // Diccionario ES -> EN generado a partir del HTML (ver i18n.js). No editar a mano las claves.
 export const EN_ESTATICO = {
+ "App para Windows:": "Windows app:",
+ "Instalador": "Installer",
+ "Ver versiones": "All versions",
  "Menú": "Menu",
  "Instalar app": "Install app",
  "Accesibilidad": "Accessibility",

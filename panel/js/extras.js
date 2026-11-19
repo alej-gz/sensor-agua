@@ -1,3 +1,5 @@
+import { alternarIdioma } from './i18n.js';
+
 // Detalles de la pagina personal: 3 temas, reproductor con lista (saltar, volumen, barra), particulas y atajos.
 
 const BLOB = 'https://tiq98qw41ktboeja.public.blob.vercel-storage.com/audio/';
@@ -188,6 +190,8 @@ document.addEventListener('keydown', (e) => {
     case 'p': anterior(); break;
     case 't': siguienteTema(); break;
     case 'q': abrirQR(); break;
+    case 'v': window.dispatchEvent(new Event('atajo-proyector')); break;
+    case 'l': alternarIdioma(); break;
     default: return;
   }
   e.preventDefault();

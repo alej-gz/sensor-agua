@@ -6,10 +6,14 @@ import { SimSource } from './simulator.js';
 import { RemoteSource } from './remote.js';
 import { Publicador } from './publisher.js';
 import './extras.js';
+import { initAlertas } from './alertas.js';
+import { initProyector } from './proyector.js';
+import { initProyecto } from './proyecto.js';
+import { t, lang, aplicarIdioma, alternarIdioma } from './i18n.js';
 import { Store } from './store.js';
 import { initActivo } from './views/activo.js';
 import { initPrueba } from './views/prueba.js';
-import { $, almacen } from './util.js';
+import { $, almacen, NOMBRES_NIVEL } from './util.js';
 
 const store = new Store();
 const pub = new Publicador();
@@ -40,7 +44,7 @@ const ui = {
 const notice = $('notice');
 let noticeTimer;
 function aviso(texto, tipo = '', ms = 8000) {
-  notice.textContent = texto;
+  notice.textContent = t(texto);
   notice.className = `notice ${tipo}`;
   notice.hidden = false;
   clearTimeout(noticeTimer);
@@ -55,16 +59,16 @@ function pintarConexion() {
   const remoto = fuente?.kind === 'remote';
   if (remoto) {
     pill.dataset.state = fuente.vivo ? 'serial' : 'demo';
-    pill.lastChild.textContent = fuente.vivo ? 'En vivo' : 'Esperando transmisión';
+    pill.lastChild.textContent = t(fuente.vivo ? 'En vivo' : 'Esperando transmisión');
   } else {
-    pill.lastChild.textContent = { serial: 'Arduino conectado', demo: 'Modo demo', off: 'Desconectado' }[estado];
+    pill.lastChild.textContent = t({ serial: 'Arduino conectado', demo: 'Modo demo', off: 'Desconectado' }[estado]);
   }
   $('btn-connect').hidden = !!fuente && !remoto;
   $('btn-demo').hidden = !!fuente && !remoto;
   $('btn-watch').hidden = !!fuente;
   $('btn-disconnect').hidden = !fuente || remoto;
   $('btn-live').hidden = !fuente || remoto;
-  $('btn-live').textContent = pub.activo ? 'Detener transmisión' : 'Transmitir en vivo';
+  $('btn-live').textContent = t(pub.activo ? 'Detener transmisión' : 'Transmitir en vivo');
   $('btn-live').classList.toggle('primary', !pub.activo);
   ui.eventos.dispatchEvent(new Event('conexion'));
 }
@@ -186,6 +190,24 @@ function mostrarVista(nombre) {
 document.querySelectorAll('[role="tab"]').forEach((b) => b.addEventListener('click', () => mostrarVista(b.dataset.tab)));
 window.addEventListener('hashchange', () => mostrarVista(location.hash.slice(1)));
 mostrarVista(location.hash.slice(1) || almacen.leer('sensorAgua.vista', 'activo'));
+
+initAlertas(store, aviso);
+initProyector();
+initProyecto();
+
+// Idioma: ES/EN
+const NIVELES_ES = [...NOMBRES_NIVEL];
+const btnLang = $('btn-lang');
+function aplicarNiveles() { NOMBRES_NIVEL.splice(0, NOMBRES_NIVEL.length, ...NIVELES_ES.map(t)); }
+btnLang.addEventListener('click', alternarIdioma);
+window.addEventListener('idioma', () => {
+  aplicarNiveles();
+  btnLang.textContent = lang === 'en' ? 'ES' : 'EN';
+  pintarConexion();
+});
+aplicarNiveles();
+btnLang.textContent = lang === 'en' ? 'ES' : 'EN';
+aplicarIdioma();
 
 pintarConexion();
 // Quien abre el enlace (o el QR) ve la transmisión en vivo automaticamente; si elige Arduino o Demo, la reemplaza

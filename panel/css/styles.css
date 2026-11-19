@@ -617,3 +617,79 @@ main { max-width: 1320px; margin: 0 auto; padding: 20px 24px 40px; }
 
 .theme-btn { bottom: 140px; }
 @media (max-width: 640px) { .theme-btn { bottom: 150px; } }
+
+
+/* ============ Laboratorio, CSV, herramientas, modo proyector ============ */
+.proy-lab { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 14px; }
+.lab h4 { margin: 0 0 6px; font: 700 17px/1.25 var(--display); }
+.lab-p { margin: 0 0 10px; font-size: 14.5px; line-height: 1.6; color: var(--muted); }
+.lab-p b { color: var(--text); }
+.lab-dato { margin: 12px 0 0; font-size: 13.5px; }
+.rango { display: grid; gap: 6px; margin: 10px 0; font-size: 14px; }
+.rango span { display: flex; justify-content: space-between; gap: 10px; color: var(--muted); }
+.rango b { color: var(--text); font-variant-numeric: tabular-nums; }
+.rango input[type="range"] { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 99px; background: var(--surface-2); cursor: pointer; margin: 6px 0; }
+.rango input[type="range"]::-webkit-slider-thumb { -webkit-appearance: none; width: 20px; height: 20px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); box-shadow: 0 0 0 1px var(--accent); }
+.rango input[type="range"]::-moz-range-thumb { width: 18px; height: 18px; border-radius: 50%; background: var(--accent); border: 2px solid var(--surface); }
+.rango input[type="range"]:focus-visible, .rango select:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+.rango select { font: inherit; padding: 9px 10px; border-radius: 9px; border: 1px solid var(--line); background: var(--surface-2); color: var(--text); }
+
+.sim-presets { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 4px; }
+.sim-presets button[aria-pressed="true"] { border-color: var(--accent); background: var(--surface-2); }
+.sim-salida { display: flex; align-items: center; justify-content: space-between; gap: 14px; flex-wrap: wrap; margin-top: 6px; }
+.sim-nivel { display: flex; align-items: baseline; gap: 12px; }
+#sim { --c: var(--lv0); }
+#sim[data-level="1"] { --c: var(--lv1); } #sim[data-level="2"] { --c: var(--lv2); } #sim[data-level="3"] { --c: var(--lv3); }
+#sim[data-level="4"] { --c: var(--lv4); } #sim[data-level="5"] { --c: var(--lv5); }
+.sim-nivel b { font: 700 64px/1 var(--display); color: var(--c); font-variant-numeric: lining-nums; transition: color .2s; }
+.sim-nivel span { font: italic 600 18px/1.2 var(--display); }
+.sim-leds { display: flex; gap: 10px; }
+.sled { display: grid; justify-items: center; gap: 4px; font-size: 11px; color: var(--muted); }
+.sled i { width: 30px; height: 30px; border-radius: 50%; background: var(--surface-2); border: 2px solid var(--line); transition: background .15s, box-shadow .15s; }
+.sled[data-n="5"] i { border-radius: 8px; }
+.sled[data-n="1"] { --c: var(--lv1); } .sled[data-n="2"] { --c: var(--lv2); } .sled[data-n="3"] { --c: var(--lv3); }
+.sled[data-n="4"] { --c: var(--lv4); } .sled[data-n="5"] { --c: var(--lv5); }
+.sled.on i { background: var(--c); border-color: var(--c); box-shadow: 0 0 16px color-mix(in srgb, var(--c) 60%, transparent); }
+.sled.on { color: var(--text); }
+
+.ohm-salida { display: grid; gap: 8px; margin-top: 6px; }
+.ohm-i { display: flex; align-items: baseline; gap: 8px; }
+.ohm-i b { font: 700 54px/1 var(--display); font-variant-numeric: lining-nums; }
+.ohm-i span { font-size: 18px; color: var(--muted); }
+.ohm-medidor { position: relative; height: 12px; border-radius: 99px; background: var(--surface-2); overflow: visible; }
+.ohm-medidor i { display: block; height: 100%; width: 30%; border-radius: 99px; background: var(--lv1); transition: width .12s, background .2s; }
+.ohm-medidor em { position: absolute; left: 66.67%; top: -4px; bottom: -4px; width: 2px; background: var(--text); opacity: .6; }
+.ohm-veredicto { margin: 8px 0 0; font-weight: 600; font-size: 14.5px; padding: 8px 12px; border-radius: 9px; background: var(--surface-2); }
+.ohm-veredicto[data-estado="ok"] { color: var(--lv1); }
+.ohm-veredicto[data-estado="alto"] { color: var(--lv3); }
+.ohm-veredicto[data-estado="peligro"] { color: var(--lv5); }
+.ohm-veredicto[data-estado="tenue"], .ohm-veredicto[data-estado="off"] { color: var(--muted); }
+.lab:has(.ohm-veredicto[data-estado="alto"]) .ohm-medidor i { background: var(--lv3); }
+.lab:has(.ohm-veredicto[data-estado="peligro"]) .ohm-medidor i { background: var(--lv5); }
+
+.proy-csv { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+.proy-csv h4 { margin: 0 0 4px; font: 700 17px/1.25 var(--display); }
+.proy-csv .proy-nota { margin: 0; max-width: 60ch; }
+
+@media (max-width: 900px) { .proy-lab { grid-template-columns: 1fr; } }
+
+/* ---- Modo proyector ---- */
+.proy-salir { position: fixed; top: 16px; right: 16px; z-index: 80; opacity: .5; transition: opacity .2s; }
+.proy-salir:hover, .proy-salir:focus-visible { opacity: 1; }
+[data-proyector="1"] .topbar, [data-proyector="1"] .notice, [data-proyector="1"] .side, [data-proyector="1"] .history,
+[data-proyector="1"] .pie, [data-proyector="1"] .theme-btn, [data-proyector="1"] .player, [data-proyector="1"] .level-foot,
+[data-proyector="1"] .meter-ticks, [data-proyector="1"] #act-leds { display: none !important; }
+[data-proyector="1"] main { max-width: none; padding: 0; min-height: 100vh; display: grid; }
+[data-proyector="1"] .activo-grid { display: grid; grid-template-columns: 1fr; min-height: 100vh; align-items: stretch; }
+[data-proyector="1"] .level-card { display: grid; align-content: center; justify-items: center; text-align: center; border-radius: 0; border: 0; min-height: 100vh; padding: 4vh 6vw; }
+[data-proyector="1"] .level-head { position: absolute; top: 3vh; left: 4vw; right: 14vw; }
+[data-proyector="1"] .level-main { flex-direction: column; gap: 2vh; margin: 0 0 4vh; }
+[data-proyector="1"] .level-num { font-size: clamp(180px, 46vh, 520px); }
+[data-proyector="1"] .level-name { font-size: clamp(40px, 8vh, 100px); }
+[data-proyector="1"] .level-sub { font-size: clamp(18px, 3vh, 32px); }
+[data-proyector="1"] .meter { width: min(900px, 80vw); }
+[data-proyector="1"] .meter-track { height: 22px; }
+[data-proyector="1"] .particulas { display: none; }
+
+.proy-lab { align-items: start; }
+.rango input[type="range"], .pl-seek, .pl-vol input { background: color-mix(in srgb, var(--text) 22%, transparent); }

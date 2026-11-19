@@ -3,6 +3,7 @@
 import { $, NOMBRES_NIVEL, fmtHora, fmtSeg, fmtReloj, fmtNum } from '../util.js';
 import { AlarmaSonora } from '../alarm.js';
 import { almacen } from '../util.js';
+import { t as tr } from '../i18n.js';
 
 export function initActivo(store, ui) {
   const card = $('level-card');
@@ -36,7 +37,7 @@ export function initActivo(store, ui) {
       card.dataset.level = '0';
       card.dataset.alarm = '0';
       $('act-level').textContent = '–';
-      $('act-level-name').textContent = ui.conectado ? 'Esperando datos…' : 'Conecta la placa o abre la demo';
+      $('act-level-name').textContent = ui.conectado ? tr('Esperando datos…') : tr('Conecta la placa o abre la demo');
       $('act-var').textContent = '–';
       $('act-read').textContent = '–';
       $('act-meter').style.width = '0%';
@@ -79,13 +80,13 @@ export function initActivo(store, ui) {
   function renderEstado() {
     const el = $('act-state');
     if (!ui.conectado) {
-      el.textContent = 'Sin conexión';
+      el.textContent = tr('Sin conexión');
       el.classList.remove('live');
     } else if (store.sismo.activo) {
-      el.textContent = `Temblor en curso · ${fmtSeg(Date.now() - store.sismo.inicio)}`;
+      el.textContent = `${tr('Temblor en curso')} · ${fmtSeg(Date.now() - store.sismo.inicio)}`;
       el.classList.add('live');
     } else {
-      el.textContent = store.actual ? 'En reposo · vigilando' : 'Esperando datos…';
+      el.textContent = store.actual ? tr('En reposo · vigilando') : tr('Esperando datos…');
       el.classList.remove('live');
     }
     $('act-uptime').textContent = ui.conectado ? fmtReloj(Date.now() - store.sesion.inicio) : '00:00:00';
@@ -100,15 +101,15 @@ export function initActivo(store, ui) {
     const box = $('act-last');
     if (!ultimo) {
       box.className = 'last empty';
-      box.textContent = 'Ninguno todavía';
+      box.textContent = tr('Ninguno todavía');
     } else {
       box.className = 'last';
       box.innerHTML = `
         <div class="last-title"><span class="chip" data-level="${ultimo.nivelMax}">${ultimo.nivelMax}</span>${NOMBRES_NIVEL[ultimo.nivelMax]}</div>
         <div class="last-meta">
-          <div><b>${fmtHora(ultimo.inicio)}</b>hora</div>
-          <div><b>${fmtSeg(ultimo.duracionMs)}</b>duración</div>
-          <div><b>${ultimo.oscilaciones}</b>oscilaciones</div>
+          <div><b>${fmtHora(ultimo.inicio)}</b>${tr('hora')}</div>
+          <div><b>${fmtSeg(ultimo.duracionMs)}</b>${tr('duración')}</div>
+          <div><b>${ultimo.oscilaciones}</b>${tr('oscilaciones')}</div>
         </div>`;
     }
 
@@ -138,6 +139,8 @@ export function initActivo(store, ui) {
   store.addEventListener('reset', () => { renderMarcas(); renderNivel(); renderSesion(); renderEstado(); });
   ui.eventos.addEventListener('conexion', () => { renderNivel(); renderEstado(); });
   setInterval(renderEstado, 500);
+
+  window.addEventListener('idioma', () => { renderMarcas(); renderNivel(); renderSesion(); renderEstado(); });
 
   renderMarcas();
   renderNivel();

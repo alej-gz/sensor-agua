@@ -174,10 +174,11 @@ initActivo(store, ui);
 const prueba = initPrueba(store, ui);
 
 function mostrarVista(nombre) {
-  const vista = nombre === 'prueba' ? 'prueba' : 'activo';
+  const vista = ['prueba', 'proyecto'].includes(nombre) ? nombre : 'activo';
   document.querySelectorAll('[role="tab"]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.tab === vista)));
   $('view-activo').hidden = vista !== 'activo';
   $('view-prueba').hidden = vista !== 'prueba';
+  $('view-proyecto').hidden = vista !== 'proyecto';
   prueba.setVisible(vista === 'prueba');
   almacen.guardar('sensorAgua.vista', vista);
   if (location.hash !== `#${vista}`) history.replaceState(null, '', `#${vista}`);

@@ -51,6 +51,7 @@
     <nav class="tabs" role="tablist" aria-label="Modo">
       <button role="tab" id="tab-activo" data-tab="activo" aria-selected="true">Siempre activo</button>
       <button role="tab" id="tab-prueba" data-tab="prueba" aria-selected="false">Modo prueba</button>
+      <button role="tab" id="tab-proyecto" data-tab="proyecto" aria-selected="false">El proyecto</button>
     </nav>
 
     <div class="conn">
@@ -251,6 +252,182 @@
           </form>
         </article>
       </div>
+    </section>
+    <section id="view-proyecto" class="view proy" role="tabpanel" aria-labelledby="tab-proyecto" hidden>
+
+      <header class="proy-intro card">
+        <span class="eyebrow">Proyecto de FIS200 · USFX</span>
+        <h2>Un vaso de agua que siente los temblores</h2>
+        <p>
+          En los socavones de <b>Llallagua (Potosí)</b> el ruido de las máquinas tapa las alarmas sonoras y hay poca luz.
+          Este proyecto usa algo muy simple: <b>cuando el suelo vibra, el agua de un recipiente se mueve</b>.
+          Un sensor lee ese movimiento y un Arduino lo convierte en una alerta de <b>5 niveles</b>, con luces y un zumbador.
+        </p>
+        <p class="proy-hip">
+          <b>Hipótesis:</b> a mayor vibración, mayor movimiento del agua y más niveles de alerta encendidos.
+        </p>
+      </header>
+
+      <h3 class="proy-h">¿Cómo funciona?</h3>
+      <ol class="proy-pasos">
+        <li class="card paso">
+          <svg viewBox="0 0 120 90" role="img" aria-label="Suelo que vibra">
+            <path d="M10 62h100" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <path d="M10 70h100M10 78h100" stroke="currentColor" stroke-opacity=".3" stroke-width="2" stroke-linecap="round"/>
+            <path d="M22 50q6-12 12 0t12 0 12 0 12 0 12 0" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+            <path d="M22 38q6-12 12 0t12 0 12 0 12 0 12 0" fill="none" stroke="var(--accent)" stroke-opacity=".5" stroke-width="3" stroke-linecap="round"/>
+            <path d="M22 26q6-12 12 0t12 0 12 0 12 0 12 0" fill="none" stroke="var(--accent)" stroke-opacity=".25" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          <b>1. El suelo vibra</b>
+          <span>Un sismo o una tronadura manda ondas por el terreno.</span>
+        </li>
+        <li class="card paso">
+          <svg viewBox="0 0 120 90" role="img" aria-label="Recipiente con agua oscilando">
+            <path d="M30 18l8 62h44l8-62" fill="none" stroke="currentColor" stroke-width="3" stroke-linejoin="round"/>
+            <path d="M34 44q6-7 13 0t13 0 13 0 12 0l4 36H38z" fill="var(--accent)" fill-opacity=".35"/>
+            <path d="M34 44q6-7 13 0t13 0 13 0 12 0" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+            <path d="M16 40l-8 5 8 5M104 40l8 5-8 5" fill="none" stroke="currentColor" stroke-opacity=".5" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <b>2. El agua oscila</b>
+          <span>Por inercia, el agua no sigue de inmediato a la base y su superficie sube y baja.</span>
+        </li>
+        <li class="card paso">
+          <svg viewBox="0 0 120 90" role="img" aria-label="Sensor de nivel con pistas de cobre">
+            <rect x="40" y="8" width="40" height="74" rx="4" fill="none" stroke="currentColor" stroke-width="3"/>
+            <path d="M50 18v50M60 18v50M70 18v50" stroke="var(--accent)" stroke-width="4" stroke-linecap="round"/>
+            <rect x="34" y="46" width="52" height="40" fill="var(--accent)" fill-opacity=".25"/>
+            <path d="M34 46q6-6 13 0t13 0 13 0 13 0" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <b>3. El sensor lo lee</b>
+          <span>Más pistas mojadas, más voltaje. El Arduino lo mide como un número de 0 a 1023.</span>
+        </li>
+        <li class="card paso">
+          <svg viewBox="0 0 120 90" role="img" aria-label="Placa Arduino UNO">
+            <rect x="14" y="16" width="92" height="58" rx="7" fill="none" stroke="currentColor" stroke-width="3"/>
+            <rect x="48" y="32" width="30" height="26" rx="3" fill="var(--accent)" fill-opacity=".35" stroke="var(--accent)" stroke-width="2"/>
+            <path d="M26 10v6M34 10v6M42 10v6M50 10v6M58 10v6M66 10v6M74 10v6M82 10v6M26 74v6M34 74v6M42 74v6M50 74v6M58 74v6" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <text x="60" y="49" text-anchor="middle" font-size="11" font-weight="700" fill="currentColor" font-family="sans-serif">UNO</text>
+          </svg>
+          <b>4. Arduino decide</b>
+          <span>Mide cuánto cambia la lectura en 0,6 s y la compara con 5 umbrales.</span>
+        </li>
+        <li class="card paso">
+          <svg viewBox="0 0 120 90" role="img" aria-label="Cuatro LEDs y un zumbador">
+            <circle cx="22" cy="40" r="10" fill="var(--lv1)"/>
+            <circle cx="48" cy="40" r="10" fill="var(--lv2)"/>
+            <circle cx="74" cy="40" r="10" fill="var(--lv3)"/>
+            <circle cx="100" cy="40" r="10" fill="var(--lv4)"/>
+            <path d="M22 58v10M48 58v10M74 58v10M100 58v10" stroke="currentColor" stroke-opacity=".5" stroke-width="3" stroke-linecap="round"/>
+            <path d="M90 14q8 6 0 12M98 10q12 10 0 20" fill="none" stroke="var(--lv5)" stroke-width="3" stroke-linecap="round"/>
+            <rect x="76" y="14" width="10" height="12" rx="2" fill="var(--lv5)"/>
+          </svg>
+          <b>5. Se enciende la alerta</b>
+          <span>Cuatro LEDs de alta luminosidad y, en el nivel máximo, un zumbador.</span>
+        </li>
+      </ol>
+
+      <h3 class="proy-h">La física detrás</h3>
+      <div class="proy-fisica">
+        <article class="card fis">
+          <svg viewBox="0 0 160 120" role="img" aria-label="Presión hidrostática a una profundidad h">
+            <rect x="30" y="14" width="76" height="92" rx="4" fill="none" stroke="currentColor" stroke-width="3"/>
+            <rect x="33" y="34" width="70" height="69" fill="var(--accent)" fill-opacity=".3"/>
+            <path d="M33 34q9-6 17 0t17 0 17 0 17 0" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+            <path d="M126 34v69M120 40l6-8 6 8M120 97l6 8 6-8" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <text x="140" y="74" font-size="15" font-style="italic" fill="currentColor" font-family="serif">h</text>
+            <path d="M52 92h-14M52 78h-10M52 64h-6" stroke="var(--accent)" stroke-width="3" stroke-linecap="round"/>
+          </svg>
+          <h4>Presión hidrostática</h4>
+          <p class="fx">P = ρ · g · h</p>
+          <p>Cuanto más profundo, más presión. Si el agua sube o baja <b>1 mm</b>, la presión cambia solo unos <b>10 Pa</b>: muy poco para un sensor barato. Por eso el prototipo mide <b>cuánto sensor queda mojado</b>, no la presión.</p>
+        </article>
+
+        <article class="card fis">
+          <svg viewBox="0 0 160 120" role="img" aria-label="Voltaje del sensor convertido en un número de 0 a 1023">
+            <path d="M14 98h132M14 98V16" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+            <path d="M18 92L50 80 62 60 90 52 104 30 140 22" fill="none" stroke="var(--accent)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M18 92h124" stroke="currentColor" stroke-opacity=".25" stroke-dasharray="4 5"/>
+            <text x="16" y="112" font-size="10" fill="currentColor" font-family="sans-serif">0</text>
+            <text x="116" y="112" font-size="10" fill="currentColor" font-family="sans-serif">1023</text>
+            <text x="22" y="14" font-size="10" fill="currentColor" font-family="sans-serif">5 V</text>
+          </svg>
+          <h4>Del voltaje al número</h4>
+          <p class="fx">V = N / 1023 · 5 V</p>
+          <p>El Arduino convierte el voltaje (0 a 5 V) en un número entero (0 a 1023). Cada unidad vale unos <b>4,9 mV</b>. Como la lectura en reposo cambia con la temperatura y el agua, el programa no usa su valor: usa <b>cuánto varía en 0,6 s</b>.</p>
+        </article>
+
+        <article class="card fis">
+          <svg viewBox="0 0 176 120" role="img" aria-label="Circuito con resistencia y LED">
+            <path d="M16 60V28h38M106 28h38v32" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M16 60v40h128V60" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M54 28l5-9 8 18 8-18 8 18 8-18 5 9" fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <circle cx="144" cy="60" r="0"/>
+            <path d="M132 50h24l-12 20zM132 74h24" fill="var(--lv3)" fill-opacity=".5" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M158 44l8-8M152 40l8-8" stroke="var(--lv3)" stroke-width="2.5" stroke-linecap="round"/>
+            <text x="20" y="22" font-size="11" fill="currentColor" font-family="sans-serif">5 V</text>
+            <text x="64" y="52" font-size="11" fill="currentColor" font-family="sans-serif">220 Ω</text>
+          </svg>
+          <h4>Ley de Ohm en los LEDs</h4>
+          <p class="fx">I = (5 V − V<sub>LED</sub>) / 220 Ω</p>
+          <p>La resistencia protege cada LED. Resultado: <b>9,1 mA</b> (azul) y <b>13,6 mA</b> (rojo), por debajo del límite de <b>20 mA</b> por pin del Arduino.</p>
+        </article>
+      </div>
+
+      <h3 class="proy-h">Los 5 niveles de alerta</h3>
+      <div class="card proy-niveles">
+        <ul class="niv-lista">
+          <li data-l="0"><span class="niv-dot"></span><b>Nivel 0</b><span>Variación 0 – 9</span><em>Normal, sin riesgo</em></li>
+          <li data-l="1"><span class="niv-dot"></span><b>Nivel 1</b><span>10 – 15 · 0,049 V</span><em>Advertencia leve</em></li>
+          <li data-l="2"><span class="niv-dot"></span><b>Nivel 2</b><span>16 – 21 · 0,078 V</span><em>Vibración baja: precaución</em></li>
+          <li data-l="3"><span class="niv-dot"></span><b>Nivel 3</b><span>22 – 27 · 0,108 V</span><em>Vibración media: posible desalojo parcial</em></li>
+          <li data-l="4"><span class="niv-dot"></span><b>Nivel 4</b><span>28 – 33 · 0,137 V</span><em>Vibración alta: preparar evacuación</em></li>
+          <li data-l="5"><span class="niv-dot"></span><b>Nivel 5 + zumbador</b><span>34 o más · 0,166 V</span><em>Vibración muy fuerte: evacuación total</em></li>
+        </ul>
+        <p class="proy-nota">Los umbrales se pueden recalibrar sin reprogramar y se guardan en la memoria del Arduino. Cada nivel se apaga al bajar 3 unidades por debajo de su umbral, para que los LEDs no parpadeen.</p>
+      </div>
+
+      <h3 class="proy-h">¿Qué tan rápido responde?</h3>
+      <div class="card proy-tiempos">
+        <div class="bars" role="img" aria-label="Tiempo de activación por nivel: 0,38; 0,42; 0,42; 0,56 y 0,42 segundos. La meta es 0,5 segundos.">
+          <div class="meta-linea"><span>meta 0,5 s</span></div>
+          <div class="bar" style="--v:.38"><i></i><b>0,38 s</b><span>Nivel 1</span></div>
+          <div class="bar" style="--v:.42"><i></i><b>0,42 s</b><span>Nivel 2</span></div>
+          <div class="bar" style="--v:.42"><i></i><b>0,42 s</b><span>Nivel 3</span></div>
+          <div class="bar sobre" style="--v:.56"><i></i><b>0,56 s</b><span>Nivel 4</span></div>
+          <div class="bar" style="--v:.42"><i></i><b>0,42 s</b><span>Nivel 5</span></div>
+        </div>
+        <p class="proy-nota">
+          Cuatro de los cinco niveles quedaron dentro de la meta de 0,5 s. El nivel 1 se activa en 0,18 a 0,22 s ante oscilaciones claras.
+          <b>Ojo:</b> estos tiempos salen de ejecutar el programa con señales simuladas, no de medir el prototipo físico.
+        </p>
+      </div>
+
+      <h3 class="proy-h">Lo que se aprendió</h3>
+      <div class="proy-cols">
+        <article class="card">
+          <h4>Lo que funcionó</h4>
+          <ul class="proy-ul">
+            <li>Medir la <b>variación</b> de la lectura (no su valor) da el mismo resultado aunque cambie el agua o la temperatura.</li>
+            <li>Con el agua quieta el sistema es estable: el ruido es de solo 0 a 3 unidades.</li>
+            <li>Los LEDs de alta luminosidad se distinguen incluso con poca luz.</li>
+            <li>La hipótesis se acepta <b>de forma cualitativa</b>: más vibración, más LEDs.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h4>Lo que falta mejorar</h4>
+          <ul class="proy-ul">
+            <li>Después de un golpe fuerte el sensor queda <b>mojado</b> y los movimientos siguientes marcan niveles más bajos.</li>
+            <li>Falta medir la lectura contra una amplitud real para validar la hipótesis con números.</li>
+            <li>Ideas: sumar un acelerómetro, alimentar el sensor solo al medir (menos corrosión) y llevar la alerta a una sala de control.</li>
+          </ul>
+        </article>
+      </div>
+
+      <p class="proy-fuentes">
+        Basado en el informe <i>«Sistema multinivel de detección de vibraciones basado en hidrostática y control óhmico en circuitos»</i> (FIS200, USFX).
+        Marco teórico: Young &amp; Freedman, <i>Física universitaria</i>; Serway &amp; Jewett, <i>Física para ciencias e ingeniería</i>; documentación de Arduino UNO.
+        Los dibujos son originales y toman los colores del tema.
+      </p>
     </section>
   </main>
 

@@ -787,9 +787,9 @@ html[data-texto-grande] body { zoom: 1.12; }
 .topbar { z-index: 40; }
 
 /* ============ Barra inferior del celular: color propio por tema, translucida y un poco mas baja ============ */
-:root { --nav-bg: rgba(168, 90, 104, .84); --nav-ink: #ffffff; --nav-sel: rgba(255, 255, 255, .22); --nav-line: #ffffff; --nav-borde: rgba(255, 255, 255, .22); }
-[data-theme="dog"] { --nav-bg: rgba(112, 52, 44, .84); --nav-ink: #F0E6D8; --nav-sel: rgba(240, 230, 216, .17); --nav-line: #D4B896; --nav-borde: rgba(212, 184, 150, .28); }
-[data-theme="cmih"] { --nav-bg: rgba(24, 110, 126, .8); --nav-ink: #F5E6C8; --nav-sel: rgba(245, 230, 200, .17); --nav-line: #E6C27A; --nav-borde: rgba(230, 194, 122, .3); }
+:root { --nav-bg: rgba(168, 90, 104, .68); --nav-ink: #ffffff; --nav-sel: rgba(255, 255, 255, .22); --nav-line: #ffffff; --nav-borde: rgba(255, 255, 255, .22); }
+[data-theme="dog"] { --nav-bg: rgba(112, 52, 44, .68); --nav-ink: #F0E6D8; --nav-sel: rgba(240, 230, 216, .17); --nav-line: #D4B896; --nav-borde: rgba(212, 184, 150, .28); }
+[data-theme="cmih"] { --nav-bg: rgba(24, 110, 126, .64); --nav-ink: #F5E6C8; --nav-sel: rgba(245, 230, 200, .17); --nav-line: #E6C27A; --nav-borde: rgba(230, 194, 122, .3); }
 
 @media (max-width: 760px) {
   .tabs, .topbar:not(.menu-open) .tabs {

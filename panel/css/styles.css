@@ -592,3 +592,28 @@ main { max-width: 1320px; margin: 0 auto; padding: 20px 24px 40px; }
 }
 
 .activo-grid { align-items: start; }
+
+
+/* ============ Reproductor con lista ============ */
+.player { display: grid; gap: 8px; min-width: 280px; padding: 12px 14px 10px; }
+.player .pl-top { display: flex; align-items: center; gap: 8px; }
+.player .pl-top button { flex: none; border: 0; cursor: pointer; display: grid; place-items: center; border-radius: 50%; transition: transform .15s, filter .15s, background .15s; }
+.player .pl-main { width: 40px; height: 40px; background: var(--accent); color: var(--accent-ink); }
+.player .pl-sec { width: 32px; height: 32px; background: var(--surface-2); color: var(--text); }
+.player .pl-top button:hover { filter: brightness(1.12); transform: translateY(-1px); }
+.player .pl-top button:active { transform: scale(.94); }
+.player .pl-text { margin-left: 4px; }
+.pl-seek, .pl-vol input { -webkit-appearance: none; appearance: none; height: 4px; border-radius: 99px; background: var(--surface-2); outline-offset: 4px; cursor: pointer; margin: 0; width: 100%; }
+.pl-seek::-webkit-slider-thumb, .pl-vol input::-webkit-slider-thumb { -webkit-appearance: none; width: 13px; height: 13px; border-radius: 50%; background: var(--accent); border: 0; }
+.pl-seek::-moz-range-thumb, .pl-vol input::-moz-range-thumb { width: 13px; height: 13px; border-radius: 50%; background: var(--accent); border: 0; }
+.pl-seek:focus-visible, .pl-vol input:focus-visible { outline: 2px solid var(--accent); }
+.pl-bottom { display: flex; align-items: center; justify-content: space-between; gap: 12px; font-size: 11.5px; color: var(--muted); font-variant-numeric: tabular-nums; }
+.pl-vol { display: flex; align-items: center; gap: 6px; width: 96px; flex: none; }
+.pl-vol svg { flex: none; }
+
+.pie-atajos { margin: 4px 0 0; font-size: 12.5px; color: var(--muted); text-align: center; }
+.pie-atajos kbd { font: 600 11.5px var(--mono); padding: 2px 6px; border-radius: 5px; border: 1px solid var(--line); background: var(--surface-2); color: var(--text); }
+@media (max-width: 640px) { .pie-atajos { display: none; } }
+
+.theme-btn { bottom: 140px; }
+@media (max-width: 640px) { .theme-btn { bottom: 150px; } }

@@ -12,3 +12,6 @@ Guion_presentacion_ingeniero.pdf
 Informe_*.docx
 Reimprimir_*.pdf
 respaldo_informes/
+
+.vercel
+.env*

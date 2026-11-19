@@ -1,0 +1,17 @@
+# Publicacion con la CLI desde esta carpeta (Vercel usa "panel" como raiz).
+# Esto reemplaza al .gitignore en la CLI: aqui SI va panel/audio, pero nunca lo privado.
+clave_transmision.txt
+.env
+.env.*
+.git
+node_modules
+Guion_presentacion_ingeniero.pdf
+Informe_*.docx
+Reimprimir_*.pdf
+respaldo_informes
+qr_panel*.png
+*.bat
+*.ps1
+*.ino
+panel/server.mjs
+panel/package.json

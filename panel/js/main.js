@@ -1,5 +1,6 @@
 // Punto de entrada: conecta la fuente de datos (placa o demo), el estado y las vistas.
 
+import './app.js';
 import { parseLine } from './protocol.js';
 import { SerialSource } from './serial.js';
 import { SimSource } from './simulator.js';

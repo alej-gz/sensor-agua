@@ -27,6 +27,11 @@
   <meta name="twitter:image" content="https://panel-sensor-agua.vercel.app/og-image.png">
   <meta name="twitter:image:alt" content="Escudo de la USFX con el título Indicador de temblores y la firma de Paul Alejandro Guzmán Calle">
   <meta name="theme-color" content="#1A0A0A">
+  <link rel="manifest" href="manifest.webmanifest">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Temblores">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="icon" href="favicon.ico" sizes="48x48">
   <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
@@ -63,6 +68,10 @@
       <button id="btn-disconnect" class="btn" hidden>Desconectar</button>
       <button id="btn-lang" class="btn" title="English / Español (L)" aria-label="Cambiar idioma">EN</button>
       <button id="btn-share" class="btn" hidden>Compartir</button>
+      <button id="btn-install" class="btn primary" hidden title="Instalar esta página como app en tu dispositivo">Instalar app</button>
+      <button id="btn-a11y" class="btn icon" aria-haspopup="true" aria-expanded="false" aria-controls="a11y-panel" aria-label="Accesibilidad" title="Accesibilidad">
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="4.5" r="1.8"/><path d="M5 8.5l7 1.5 7-1.5M12 10v4.5M12 14.5l-3.5 6M12 14.5l3.5 6"/></svg>
+      </button>
       <button id="btn-qr" class="btn" aria-haspopup="dialog" title="Mostrar el código QR de esta página">Mostrar QR</button>
     </div>
   </header>
@@ -717,6 +726,28 @@
     </a>
     <p class="pie-atajos">Atajos: <kbd>M</kbd> música · <kbd>N</kbd> siguiente · <kbd>P</kbd> anterior · <kbd>T</kbd> tema · <kbd>Q</kbd> código QR · <kbd>V</kbd> proyector · <kbd>L</kbd> idioma</p>
   </footer>
+  <div id="a11y-panel" class="a11y-panel" hidden role="region" aria-label="Opciones de accesibilidad">
+    <h2>Accesibilidad</h2>
+    <label class="switch"><input type="checkbox" id="a11y-particulas"><span></span>Reducir partículas</label>
+    <p>Quita las partículas flotantes y el grano de película. Ayuda en celulares lentos.</p>
+    <label class="switch"><input type="checkbox" id="a11y-anim"><span></span>Reducir animaciones</label>
+    <p>Desactiva transiciones y parpadeos.</p>
+    <label class="switch"><input type="checkbox" id="a11y-texto"><span></span>Texto más grande</label>
+    <p>Aumenta el tamaño de todo el contenido.</p>
+  </div>
+
+  <dialog id="ios-dialog" class="qr-dialog" aria-labelledby="ios-titulo">
+    <form method="dialog" class="qr-cuerpo">
+      <h2 id="ios-titulo">Instala la app en tu iPhone</h2>
+      <ol class="ios-pasos">
+        <li>Toca el botón Compartir de Safari.</li>
+        <li>Elige «Añadir a pantalla de inicio».</li>
+        <li>Confirma con «Añadir».</li>
+      </ol>
+      <div class="qr-acciones"><button class="btn primary" value="cerrar">Cerrar</button></div>
+    </form>
+  </dialog>
+
   <button id="proy-salir" class="btn proy-salir" hidden>Salir del modo proyector</button>
   <div class="particulas" id="particulas" aria-hidden="true"></div>
   <button class="theme-btn" id="theme-btn" aria-label="Cambiar tema">&#9993;&#65039;</button>

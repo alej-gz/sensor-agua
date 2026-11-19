@@ -40,6 +40,7 @@ let arrastrando = false;
 function particulas() {
   const cont = $('particulas');
   cont.textContent = '';
+  if (document.documentElement.hasAttribute('data-sin-particulas')) return;   // opcion de accesibilidad
   for (let i = 0; i < 16; i++) {
     const s = document.createElement('span');
     s.textContent = actual.simbolos[Math.floor(Math.random() * actual.simbolos.length)];
@@ -141,6 +142,7 @@ function aplicar(tema, cambiarCancion = true) {
   if (cambiarCancion) cargar(tema.pista, !audio.paused);
   particulas();
 }
+window.addEventListener('a11y', particulas);
 const siguienteTema = () => aplicar(TEMAS[(TEMAS.indexOf(actual) + 1) % TEMAS.length]);
 $('theme-btn').addEventListener('click', siguienteTema);
 

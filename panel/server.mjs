@@ -20,6 +20,7 @@ const tipos = {
   '.png': 'image/png',
   '.ico': 'image/x-icon',
   '.md': 'text/plain; charset=utf-8',
+  '.webmanifest': 'application/manifest+json',
 };
 
 const servidor = http.createServer((req, res) => {

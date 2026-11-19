@@ -1,5 +1,17 @@
 // Diccionario ES -> EN generado a partir del HTML (ver i18n.js). No editar a mano las claves.
 export const EN_ESTATICO = {
+ "Instalar app": "Install app",
+ "Accesibilidad": "Accessibility",
+ "Reducir partículas": "Reduce particles",
+ "Quita las partículas flotantes y el grano de película. Ayuda en celulares lentos.": "Removes the floating particles and the film grain. Helps on slow phones.",
+ "Reducir animaciones": "Reduce animations",
+ "Desactiva transiciones y parpadeos.": "Turns off transitions and flashing.",
+ "Texto más grande": "Larger text",
+ "Aumenta el tamaño de todo el contenido.": "Makes all content larger.",
+ "Instala la app en tu iPhone": "Install the app on your iPhone",
+ "Toca el botón Compartir de Safari.": "Tap Safari's Share button.",
+ "Elige «Añadir a pantalla de inicio».": "Choose “Add to Home Screen”.",
+ "Confirma con «Añadir».": "Confirm with “Add”.",
  "Indicador de temblores · USFX": "Tremor indicator · USFX",
  "Indicador de temblores": "Tremor indicator",
  "Sensor de nivel de agua · Arduino UNO": "Water level sensor · Arduino UNO",
@@ -278,6 +290,9 @@ export const EN_ESTATICO = {
 };
 
 export const EN_ATRIBUTOS = {
+ "Instalar esta página como app en tu dispositivo": "Install this page as an app on your device",
+ "Accesibilidad": "Accessibility",
+ "Opciones de accesibilidad": "Accessibility options",
  "Sensor de nivel de agua con Arduino UNO que detecta temblores, en vivo. Por Paul Alejandro Guzmán Calle · alej-gz.vercel.app": "Water level sensor with Arduino UNO that detects tremors, live. By Paul Alejandro Guzmán Calle · alej-gz.vercel.app",
  "Escudo de la Universidad San Francisco Xavier": "Crest of the Universidad San Francisco Xavier",
  "Modo": "Mode",

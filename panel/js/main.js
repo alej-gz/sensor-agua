@@ -31,7 +31,7 @@ const ui = {
       store.addLog(`> ${texto.trim()}`, 'out');
       return true;
     } catch (e) {
-      store.addLog(`Error al enviar: ${e.message}`, 'err');
+      store.addLog(`${t('Error al enviar')}: ${e.message}`, 'err');
       return false;
     }
   },

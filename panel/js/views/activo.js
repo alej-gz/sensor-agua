@@ -26,7 +26,7 @@ export function initActivo(store, ui) {
   });
 
   $('btn-clear-history').addEventListener('click', () => {
-    if (confirm('¿Borrar todo el historial de temblores guardado en este navegador?')) store.borrarHistorial();
+    if (confirm(tr('¿Borrar todo el historial de temblores guardado en este navegador?'))) store.borrarHistorial();
   });
 
   // --- Indicador ---
@@ -121,7 +121,7 @@ export function initActivo(store, ui) {
         <span class="chip" data-level="${r.nivelMax}">${r.nivelMax}</span>
         <time>${fmtHora(r.inicio)}</time>
         <span>${NOMBRES_NIVEL[r.nivelMax]}</span>
-        <span class="meta">${fmtSeg(r.duracionMs)} · ${r.oscilaciones} osc · ${fmtNum(r.oscPorSeg, 1)} osc/s · var. máx ${r.variacionMax}</span>`;
+        <span class="meta">${fmtSeg(r.duracionMs)} · ${r.oscilaciones} osc · ${fmtNum(r.oscPorSeg, 1)} osc/s · ${tr('var. máx')} ${r.variacionMax}</span>`;
       lista.appendChild(li);
     }
     $('act-history-empty').hidden = store.historial.length > 0;

@@ -2,7 +2,9 @@
 
 import { $, NOMBRES_NIVEL, fmtNum, fmtHora, fmtReloj, descargarCSV, marcaArchivo } from '../util.js';
 import { TimeChart } from '../chart.js';
+import { t, lang } from '../i18n.js';
 
+const loc = () => (lang === 'en' ? 'en-GB' : 'es');
 const COLORES_NIVEL = ['--lv0', '--lv1', '--lv2', '--lv3', '--lv4', '--lv5'];
 
 export function initPrueba(store, ui) {
@@ -31,7 +33,7 @@ export function initPrueba(store, ui) {
 
   $('btn-pause').addEventListener('click', (e) => {
     pausado = !pausado;
-    e.currentTarget.textContent = pausado ? 'Reanudar gráficas' : 'Pausar gráficas';
+    e.currentTarget.textContent = t(pausado ? 'Reanudar gráficas' : 'Pausar gráficas');
   });
 
   // --- Graficas (a ~30 fps mientras la vista esta visible) ---
@@ -58,8 +60,8 @@ export function initPrueba(store, ui) {
     const meta = $('th-meta');
     if (store.umbrales) {
       store.umbrales.forEach((u, i) => { $(`th-${i + 1}`).value = u; });
-      meta.textContent = `Histéresis: ${store.histeresis ?? '–'} puntos · Ventana de variación: ${store.ventanaMs ?? '–'} ms`;
-      $('win-info').textContent = store.ventanaMs ? `· ventana ${store.ventanaMs} ms` : '';
+      meta.textContent = `${t('Histéresis')}: ${store.histeresis ?? '–'} ${t('puntos')} · ${t('Ventana de variación')}: ${store.ventanaMs ?? '–'} ms`;
+      $('win-info').textContent = store.ventanaMs ? `· ${t('ventana')} ${store.ventanaMs} ms` : '';
     }
   }
 
@@ -68,7 +70,7 @@ export function initPrueba(store, ui) {
     const w = store.ventana(ventanaMs);
     const n = w.lect.length;
     $('st-rate').textContent = ui.conectado ? `${fmtNum(store.frecuencia(), 1)} Hz` : '–';
-    $('st-n').textContent = n ? n.toLocaleString('es') : '–';
+    $('st-n').textContent = n ? n.toLocaleString(loc()) : '–';
     if (!n) {
       ['st-minmax', 'st-mean', 'st-sd', 'st-var', 'st-level'].forEach((id) => { $(id).textContent = '–'; });
     } else {
@@ -103,7 +105,7 @@ export function initPrueba(store, ui) {
 
     // Grabacion
     if (store.grabando) {
-      $('rec-info').textContent = `Grabando · ${store.grabacion.length.toLocaleString('es')} muestras · ${fmtReloj(store.grabacion.length * 20)}`;
+      $('rec-info').textContent = `${t('Grabando')} · ${store.grabacion.length.toLocaleString(loc())} ${t('muestras')} · ${fmtReloj(store.grabacion.length * 20)}`;
     }
   }
 
@@ -128,12 +130,12 @@ export function initPrueba(store, ui) {
   });
   store.addEventListener('recording', () => {
     btnRec.setAttribute('aria-pressed', String(store.grabando));
-    btnRec.lastChild.textContent = store.grabando ? 'Detener' : 'Grabar';
+    btnRec.lastChild.textContent = t(store.grabando ? 'Detener' : 'Grabar');
     $('btn-export-rec').disabled = store.grabacion.length === 0 && !store.grabando;
     if (!store.grabando) {
       $('rec-info').textContent = store.grabacion.length
-        ? `Grabación lista · ${store.grabacion.length.toLocaleString('es')} muestras`
-        : 'Sin grabación';
+        ? `${t('Grabación lista')} · ${store.grabacion.length.toLocaleString(loc())} ${t('muestras')}`
+        : t('Sin grabación');
     }
   });
   $('btn-export-rec').addEventListener('click', () => {
@@ -178,18 +180,18 @@ export function initPrueba(store, ui) {
   $('btn-th-send').addEventListener('click', async () => {
     const v = [1, 2, 3, 4, 5].map((i) => Number($(`th-${i}`).value));
     const ok = v.every((x, i) => Number.isInteger(x) && x >= 1 && x <= 1023 && (i === 0 || x > v[i - 1]));
-    if (!ok) { aviso('Los umbrales deben ser enteros de 1 a 1023 y de menor a mayor.', 'err'); return; }
-    if (await ui.enviar(`u${v.join(',')}\n`)) aviso('Enviado. La placa los guarda en su memoria (EEPROM).', 'ok');
-    else aviso('No hay conexión con la placa.', 'err');
+    if (!ok) { aviso(t('Los umbrales deben ser enteros de 1 a 1023 y de menor a mayor.'), 'err'); return; }
+    if (await ui.enviar(`u${v.join(',')}\n`)) aviso(t('Enviado. La placa los guarda en su memoria (EEPROM).'), 'ok');
+    else aviso(t('No hay conexión con la placa.'), 'err');
   });
   $('btn-th-read').addEventListener('click', async () => {
-    if (await ui.enviar('v')) aviso('Umbrales leídos de la placa.', 'ok');
-    else aviso('No hay conexión con la placa.', 'err');
+    if (await ui.enviar('v')) aviso(t('Umbrales leídos de la placa.'), 'ok');
+    else aviso(t('No hay conexión con la placa.'), 'err');
   });
   $('btn-th-reset').addEventListener('click', async () => {
-    if (!confirm('¿Restaurar los umbrales por defecto en la placa?')) return;
-    if (await ui.enviar('r')) aviso('Restaurados los valores por defecto.', 'ok');
-    else aviso('No hay conexión con la placa.', 'err');
+    if (!confirm(t('¿Restaurar los umbrales por defecto en la placa?'))) return;
+    if (await ui.enviar('r')) aviso(t('Restaurados los valores por defecto.'), 'ok');
+    else aviso(t('No hay conexión con la placa.'), 'err');
   });
 
   // --- Sonido de la alarma (pitido o melodia) ---
@@ -200,21 +202,21 @@ export function initPrueba(store, ui) {
     if (store.melodia === null) {
       optMelodia.checked = false;
       msgMelodia.textContent = ui.conectado
-        ? 'Esperando el estado de la placa… (si no aparece, carga el sketch actualizado).'
-        : 'Conecta la placa para elegir el sonido.';
+        ? t('Esperando el estado de la placa… (si no aparece, carga el sketch actualizado).')
+        : t('Conecta la placa para elegir el sonido.');
       return;
     }
     optMelodia.checked = store.melodia;
     msgMelodia.textContent = store.melodia
-      ? 'Activado: en el nivel 5 suena la melodía. La placa lo guarda en su memoria.'
-      : 'Desactivado: en el nivel 5 suena el pitido continuo.';
+      ? t('Activado: en el nivel 5 suena la melodía. La placa lo guarda en su memoria.')
+      : t('Desactivado: en el nivel 5 suena el pitido continuo.');
   }
   optMelodia.addEventListener('change', async () => {
     const quiero = optMelodia.checked;
-    msgMelodia.textContent = 'Enviado, esperando confirmación de la placa…';  // la respuesta 'S' lo reemplaza
+    msgMelodia.textContent = t('Enviado, esperando confirmación de la placa…');  // la respuesta 'S' lo reemplaza
     if (!(await ui.enviar(quiero ? 'm' : 'b'))) {
       optMelodia.checked = !quiero;
-      msgMelodia.textContent = 'No hay conexión con la placa.';
+      msgMelodia.textContent = t('No hay conexión con la placa.');
     }
   });
   store.addEventListener('sound', pintarSonido);
@@ -238,7 +240,7 @@ export function initPrueba(store, ui) {
     const input = $('cmd-input');
     const texto = input.value.trim();
     if (!texto) return;
-    if (!(await ui.enviar(`${texto}\n`))) agregarLinea({ texto: 'No hay conexión con la placa.', clase: 'err' });
+    if (!(await ui.enviar(`${texto}\n`))) agregarLinea({ texto: t('No hay conexión con la placa.'), clase: 'err' });
     input.value = '';
   });
 
@@ -261,6 +263,16 @@ export function initPrueba(store, ui) {
     store.dispatchEvent(new Event('recording'));
     dibujar();
     renderStats();
+  });
+
+  // Al cambiar de idioma se vuelven a pintar los textos que genera el programa
+  window.addEventListener('idioma', () => {
+    $('btn-pause').textContent = t(pausado ? 'Reanudar gráficas' : 'Pausar gráficas');
+    aplicarUmbralesEnGrafica();
+    pintarSonido();
+    store.dispatchEvent(new Event('recording'));
+    renderStats();
+    dibujar();
   });
 
   return {

@@ -1,6 +1,8 @@
 // Fuente de datos simulada: genera las mismas lineas que la placa en modo datos.
 // Sirve para mostrar el panel sin el Arduino conectado.
 
+import { t as tr } from './i18n.js';
+
 import { Detector, POR_DEFECTO } from './detector.js';
 
 // Ruido gaussiano (Box-Muller)
@@ -36,8 +38,8 @@ export class SimSource extends EventTarget {
     this.t0 = performance.now();
     this.simT = 0;
     this.proximoAuto = 5000;
-    this._emitir('=== Indicador de temblores (SIMULADOR) ===');
-    this._emitir('Datos simulados con la misma logica que la placa.');
+    this._emitir(tr('=== Indicador de temblores (SIMULADOR) ==='));
+    this._emitir(tr('Datos simulados con la misma logica que la placa.'));
     this._timer = setInterval(() => this._tick(), 20);
     setTimeout(() => this.send('d'), 200);
   }
@@ -118,24 +120,24 @@ export class SimSource extends EventTarget {
       const v = (t.match(/\d+/g) || []).map(Number);
       const ok = v.length === 5 && v.every((x, i) => x >= 1 && x <= 1023 && (i === 0 || x > v[i - 1]));
       if (!ok) {
-        this._emitir('Error: umbrales fuera de rango (1-1023) o no van de menor a mayor.');
+        this._emitir(tr('Error: umbrales fuera de rango (1-1023) o no van de menor a mayor.'));
         return;
       }
       this.det.umbrales = v;
-      this._emitir('Umbrales actualizados.');
+      this._emitir(tr('Umbrales actualizados.'));
       if (this.modoDatos) this._config();
       return;
     }
     for (const c of t.toLowerCase()) {
       if (c === 'd') { this.modoDatos = true; this._config(); this._sonido(); }
-      else if (c === 't') { this.modoDatos = false; this._emitir('Modo texto.'); }
+      else if (c === 't') { this.modoDatos = false; this._emitir(tr('Modo texto.')); }
       else if (c === 'v') { this._config(); this._sonido(); }
       else if (c === 'm' || c === 'b') { this.melodia = c === 'm'; this._sonido(); }
       else if (c === 'r') {
         this.det.umbrales = [...POR_DEFECTO.umbrales];
-        this._emitir('Umbrales por defecto restaurados.');
+        this._emitir(tr('Umbrales por defecto restaurados.'));
         this._config();
-      } else if (c === 'h') this._emitir('Simulador: comandos d, t, v, r, m, b, u10,16,23,31,40');
+      } else if (c === 'h') this._emitir(tr('Simulador: comandos d, t, v, r, m, b, u10,16,23,31,40'));
     }
   }
 }

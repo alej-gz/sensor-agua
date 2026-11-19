@@ -1,6 +1,8 @@
 // Grafica de series en el tiempo sobre <canvas>, sin dependencias.
 // Eje X: segundos hacia atras desde "ahora". Eje Y: fijo o automatico.
 
+import { t as tr } from './i18n.js';
+
 function pasoBonito(rango) {
   const bruto = rango / 5;
   const mag = 10 ** Math.floor(Math.log10(bruto));
@@ -106,7 +108,7 @@ export class TimeChart {
       ctx.strokeStyle = cGrid;
       ctx.beginPath(); ctx.moveTo(x, y0); ctx.lineTo(x, y1); ctx.stroke();
       ctx.fillStyle = cText;
-      ctx.fillText(s === 0 ? 'ahora' : `−${s} s`, x, y1 + 6);
+      ctx.fillText(s === 0 ? tr('ahora') : `−${s} s`, x, y1 + 6);
     }
     ctx.strokeStyle = cAxis;
     ctx.strokeRect(x0 + 0.5, y0 + 0.5, x1 - x0 - 1, y1 - y0 - 1);
@@ -150,7 +152,7 @@ export class TimeChart {
       ctx.fillStyle = cText;
       ctx.textAlign = 'center';
       ctx.font = '13px "Segoe UI", system-ui, sans-serif';
-      ctx.fillText('Sin datos: conecta la placa o abre la demo', (x0 + x1) / 2, (y0 + y1) / 2);
+      ctx.fillText(tr('Sin datos: conecta la placa o abre la demo'), (x0 + x1) / 2, (y0 + y1) / 2);
     }
   }
 }

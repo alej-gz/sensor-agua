@@ -1,11 +1,13 @@
 // Utilidades compartidas: formatos, nombres de nivel, CSV y almacenamiento local.
 
+import { lang } from './i18n.js';
+
 export const NOMBRES_NIVEL = ['Sin movimiento', 'Muy leve', 'Leve', 'Moderado', 'Fuerte', 'Muy fuerte'];
 
 export const $ = (id) => document.getElementById(id);
 
 export function fmtNum(n, dec = 1) {
-  return Number.isFinite(n) ? n.toFixed(dec).replace('.', ',') : '–';
+  return Number.isFinite(n) ? n.toFixed(dec).replace('.', lang === 'en' ? '.' : ',') : '–';
 }
 
 export function fmtSeg(ms) {
@@ -13,7 +15,7 @@ export function fmtSeg(ms) {
 }
 
 export function fmtHora(fecha) {
-  return new Date(fecha).toLocaleTimeString('es', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+  return new Date(fecha).toLocaleTimeString(lang === 'en' ? 'en-GB' : 'es', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
 }
 
 export function fmtReloj(ms) {

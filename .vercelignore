@@ -1,5 +1,5 @@
 # Publicacion con la CLI desde esta carpeta (Vercel usa "panel" como raiz).
-# Esto reemplaza al .gitignore en la CLI: aqui SI va panel/audio, pero nunca lo privado.
+# Esto reemplaza al .gitignore en la CLI. El audio vive en Vercel Blob, no se sube con el sitio.
 clave_transmision.txt
 .env
 .env.*
@@ -15,3 +15,4 @@ qr_panel*.png
 *.ino
 panel/server.mjs
 panel/package.json
+panel/audio

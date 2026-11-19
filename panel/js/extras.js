@@ -1,9 +1,9 @@
 // Detalles de la pagina personal: 3 temas (cada uno con su cancion), reproductor y particulas flotantes.
 
 const TEMAS = [
-  { id: 'dog', emoji: '🐾', titulo: "Man's Best Friend", meta: '#1A0A0A', pista: 'audio/such-a-funny-way.mp3', nombre: 'such a funny way', simbolos: ['🐾', '✧', '·'] },
-  { id: 'cmih', emoji: '☕', titulo: "Short n' Sweet", meta: '#0D2030', pista: 'audio/cmih.mp3', nombre: "couldn't make it harder", simbolos: ['☕', '✧', '♡'] },
-  { id: 'default', emoji: '✉️', titulo: "Emails I Can't Send", meta: '#FFF5F5', pista: 'audio/garden.mp3', nombre: 'garden', simbolos: ['❤', '♥', '♡', '✧', '❀'] },
+  { id: 'dog', emoji: '🐾', titulo: "Man's Best Friend", meta: '#1A0A0A', pista: 'https://tiq98qw41ktboeja.public.blob.vercel-storage.com/audio/such-a-funny-way.mp3', nombre: 'such a funny way', simbolos: ['🐾', '✧', '·'] },
+  { id: 'cmih', emoji: '☕', titulo: "Short n' Sweet", meta: '#0D2030', pista: 'https://tiq98qw41ktboeja.public.blob.vercel-storage.com/audio/cmih.mp3', nombre: "couldn't make it harder", simbolos: ['☕', '✧', '♡'] },
+  { id: 'default', emoji: '✉️', titulo: "Emails I Can't Send", meta: '#FFF5F5', pista: 'https://tiq98qw41ktboeja.public.blob.vercel-storage.com/audio/garden.mp3', nombre: 'garden', simbolos: ['❤', '♥', '♡', '✧', '❀'] },
 ];
 const CLAVE = 'sensorAgua.tema';
 const $ = (id) => document.getElementById(id);

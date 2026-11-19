@@ -44,6 +44,6 @@ node server.mjs
 
 ## Nota sobre la música
 
-El reproductor del panel usa tres canciones comerciales que **no se incluyen** en este repositorio por derechos de autor.
-Para usar el reproductor, coloca tus propios archivos MP3 en `panel/audio/` con los nombres `garden.mp3`, `such-a-funny-way.mp3` y `cmih.mp3`
-(o cambia las rutas en `panel/js/extras.js`). Sin ellos, el panel funciona igual y el botón de reproducir queda sin sonido.
+El reproductor usa tres canciones comerciales que **no están en este repositorio** por derechos de autor.
+Se sirven desde un almacén de Vercel Blob (las direcciones están en `panel/js/extras.js`).
+Si clonas el proyecto, cambia esas rutas por tus propios archivos MP3.

@@ -721,3 +721,40 @@ html[data-sin-anim] *, html[data-sin-anim] *::before, html[data-sin-anim] *::aft
 html[data-texto-grande] body { zoom: 1.12; }
 
 @media (max-width: 640px) { .a11y-panel { top: 70px; right: 16px; } }
+
+
+/* ============ Menu del celular: todas las opciones de la cabecera en un solo apartado ============ */
+.menu-toggle, .solo-movil { display: none; }
+@media (max-width: 760px) {
+  .topbar { padding: 10px 16px; gap: 10px 12px; }
+  .topbar .brand { order: 1; flex: 1 1 auto; min-width: 0; margin-right: 0; }
+  .topbar .sub { display: none; }
+  .menu-toggle { display: inline-flex; order: 2; flex: none; gap: 8px; }
+  .conn { display: contents; }
+  #conn-status { order: 3; margin-right: auto; }
+  .tabs { order: 4; }
+  .conn > .btn { order: 5; }
+  .solo-movil { display: inline; }
+  .btn.icon { padding: 8px 14px; }
+
+  /* Cerrado: solo la marca, el boton Menu y el estado de la conexion */
+  .topbar:not(.menu-open) .tabs,
+  .topbar:not(.menu-open) .conn > :not(#conn-status) { display: none !important; }
+
+  /* Abierto: pestanas arriba y las acciones en dos columnas */
+  .topbar.menu-open .tabs { flex: 1 1 100%; }
+  .topbar.menu-open .tabs button { flex: 1; padding: 10px 6px; font-size: 13.5px; }
+  .topbar.menu-open .conn > .btn { flex: 1 1 calc(50% - 6px); justify-content: center; padding: 11px 12px; }
+  .topbar.menu-open { padding-bottom: 14px; }
+  .topbar.menu-open #btn-menu { border-color: var(--accent); }
+}
+
+/* Celular: reproductor compacto (una sola fila) y aire abajo para que no tape el contenido */
+@media (max-width: 760px) {
+  .player { padding: 8px 12px; gap: 0; }
+  .player .pl-seek, .player .pl-bottom { display: none; }
+  .player .pl-main { width: 36px; height: 36px; }
+  .player .pl-sec { width: 30px; height: 30px; }
+  .theme-btn { bottom: 84px; right: 16px; width: 40px; height: 40px; }
+  main { padding-bottom: 96px; }
+}

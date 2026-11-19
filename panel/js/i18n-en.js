@@ -1,5 +1,6 @@
 // Diccionario ES -> EN generado a partir del HTML (ver i18n.js). No editar a mano las claves.
 export const EN_ESTATICO = {
+ "Menú": "Menu",
  "Instalar app": "Install app",
  "Accesibilidad": "Accessibility",
  "Reducir partículas": "Reduce particles",
@@ -290,6 +291,7 @@ export const EN_ESTATICO = {
 };
 
 export const EN_ATRIBUTOS = {
+ "Menú principal": "Main menu",
  "Instalar esta página como app en tu dispositivo": "Install this page as an app on your device",
  "Accesibilidad": "Accessibility",
  "Opciones de accesibilidad": "Accessibility options",

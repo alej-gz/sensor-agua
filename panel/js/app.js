@@ -65,6 +65,27 @@ function iniciarPanel() {
   });
 }
 
+// ---------------------------------------------------------------- Menu del celular
+function iniciarMenu() {
+  const barra = document.querySelector('.topbar');
+  const btn = $('btn-menu');
+  if (!barra || !btn) return;
+  const abrir = (si) => {
+    barra.classList.toggle('menu-open', si);
+    btn.setAttribute('aria-expanded', String(si));
+  };
+  btn.addEventListener('click', () => abrir(!barra.classList.contains('menu-open')));
+  // Al elegir una opcion del menu, se cierra para que se vea el resultado
+  barra.addEventListener('click', (e) => {
+    const b = e.target.closest('button, a');
+    if (b && b !== btn && barra.classList.contains('menu-open') && b.closest('.tabs, .conn')) setTimeout(() => abrir(false), 60);
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && barra.classList.contains('menu-open')) { abrir(false); btn.focus(); } });
+  document.addEventListener('click', (e) => { if (barra.classList.contains('menu-open') && !barra.contains(e.target)) abrir(false); });
+  // Al pasar a escritorio el menu vuelve a su estado normal
+  matchMedia('(min-width: 761px)').addEventListener('change', (m) => { if (m.matches) abrir(false); });
+}
+
 // ---------------------------------------------------------------- App instalable
 const standalone = () => matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
 let eventoInstalar = null;
@@ -114,6 +135,7 @@ let arrancado = false;
 function arrancar() {
   if (arrancado) return;
   arrancado = true;
+  iniciarMenu();
   iniciarPanel();
   iniciarInstalacion();
 }

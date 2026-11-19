@@ -373,6 +373,116 @@
         </article>
       </div>
 
+      <h3 class="proy-h">¿Cómo armarlo?</h3>
+      <div class="card proy-armar">
+        <h4>Materiales</h4>
+        <ul class="mats">
+          <li><b>1</b> Arduino UNO</li>
+          <li><b>1</b> Protoboard</li>
+          <li><b>1</b> Sensor de nivel de agua (módulo de pistas expuestas)</li>
+          <li><b>4</b> LEDs de alta luminosidad</li>
+          <li><b>4</b> Resistencias de 220 Ω</li>
+          <li><b>1</b> Zumbador pasivo</li>
+          <li><b>~10</b> Cables jumper</li>
+          <li><b>1</b> Recipiente plástico transparente, con tapa</li>
+          <li><b>1</b> Alimentación: USB de la computadora o batería de 9 V</li>
+          <li><b>1</b> Computadora con el Arduino IDE</li>
+        </ul>
+      </div>
+
+      <div class="card proy-conex">
+        <h4>Diagrama de conexiones</h4>
+        <div class="scroll-x">
+          <svg viewBox="0 0 740 380" role="img" aria-label="Conexiones: LEDs en D13 a D10 con resistencias de 220 ohmios, zumbador en D9, sensor en A0, 5 voltios y tierra común">
+            <!-- Arduino -->
+            <rect x="14" y="14" width="150" height="352" rx="10" fill="var(--surface-2)" stroke="currentColor" stroke-width="2.5"/>
+            <text x="89" y="42" text-anchor="middle" font-size="16" font-weight="700" fill="currentColor" font-family="sans-serif">Arduino UNO</text>
+            <g font-size="13" font-weight="600" fill="currentColor" font-family="sans-serif" text-anchor="end">
+              <text x="152" y="78">D13</text><text x="152" y="124">D12</text><text x="152" y="170">D11</text><text x="152" y="216">D10</text>
+              <text x="152" y="262">D9</text><text x="152" y="308">A0</text><text x="152" y="338">5 V</text><text x="152" y="358">GND</text>
+            </g>
+            <!-- riel de tierra -->
+            <path d="M690 66V360" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+            <text x="730" y="30" text-anchor="end" font-size="13" font-weight="700" fill="currentColor" font-family="sans-serif">GND (tierra común)</text>
+
+            <!-- LEDs: cable, resistencia, LED, tierra -->
+            <g fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M164 74H250M362 74H520M552 74H690"/>
+              <path d="M164 120H250M362 120H520M552 120H690"/>
+              <path d="M164 166H250M362 166H520M552 166H690"/>
+              <path d="M164 212H250M362 212H520M552 212H690"/>
+              <path d="M164 258H430M500 258H690"/>
+            </g>
+            <g fill="none" stroke="var(--accent)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M250 74l8-12 12 24 12-24 12 24 12-24 12 24 12-24 12 24 8-12"/>
+              <path d="M250 120l8-12 12 24 12-24 12 24 12-24 12 24 12-24 12 24 8-12"/>
+              <path d="M250 166l8-12 12 24 12-24 12 24 12-24 12 24 12-24 12 24 8-12"/>
+              <path d="M250 212l8-12 12 24 12-24 12 24 12-24 12 24 12-24 12 24 8-12"/>
+            </g>
+            <g font-size="12" fill="currentColor" font-family="sans-serif" text-anchor="middle">
+              <text x="350" y="60">220 Ω</text><text x="350" y="106">220 Ω</text><text x="350" y="152">220 Ω</text><text x="350" y="198">220 Ω</text>
+            </g>
+            <g stroke="currentColor" stroke-width="2.5" stroke-linejoin="round">
+              <path d="M520 58v32l28-16z" fill="var(--lv1)"/><path d="M552 58v32" fill="none"/>
+              <path d="M520 104v32l28-16z" fill="var(--lv2)"/><path d="M552 104v32" fill="none"/>
+              <path d="M520 150v32l28-16z" fill="var(--lv3)"/><path d="M552 150v32" fill="none"/>
+              <path d="M520 196v32l28-16z" fill="var(--lv4)"/><path d="M552 196v32" fill="none"/>
+            </g>
+            <g font-size="13" font-weight="700" fill="currentColor" font-family="sans-serif">
+              <text x="604" y="64">LED 1</text><text x="604" y="110">LED 2</text><text x="604" y="156">LED 3</text><text x="604" y="202">LED 4</text>
+            </g>
+
+            <!-- Zumbador -->
+            <rect x="430" y="244" width="70" height="28" rx="6" fill="var(--lv5)" fill-opacity=".85" stroke="currentColor" stroke-width="2.5"/>
+            <text x="465" y="263" text-anchor="middle" font-size="12" font-weight="700" fill="#fff" font-family="sans-serif">Zumbador</text>
+
+            <!-- Sensor -->
+            <rect x="430" y="292" width="110" height="74" rx="8" fill="none" stroke="currentColor" stroke-width="2.5"/>
+            <text x="485" y="312" text-anchor="middle" font-size="13" font-weight="700" fill="currentColor" font-family="sans-serif">Sensor de nivel</text>
+            <g font-size="12" font-weight="600" fill="currentColor" font-family="sans-serif">
+              <text x="438" y="334">S</text><text x="438" y="348">+</text><text x="438" y="362">−</text>
+            </g>
+            <g fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M164 304H300V330H430"/>
+              <path d="M164 334H290V344H430"/>
+            </g>
+            <path d="M164 354H280V358H430" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M540 359H690" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <p class="proy-nota">Cada LED va en serie con su resistencia, del nivel 1 al 4. Los cables de color son los del sensor (S a A0, + a 5 V); el cable inferior (−) lleva su tierra al riel común, igual que los LEDs y el zumbador.</p>
+      </div>
+
+      <h4 class="proy-h4">Pasos</h4>
+      <ol class="armar-pasos">
+        <li><b>Arma los LEDs.</b> Cada LED va en serie con una resistencia de 220 Ω: D13 → LED 1, D12 → LED 2, D11 → LED 3 y D10 → LED 4. Los cátodos van al riel de tierra (GND).</li>
+        <li><b>Conecta el zumbador</b> entre el pin D9 y GND.</li>
+        <li><b>Prepara el recipiente.</b> Llénalo solo en parte con agua y ponlo sobre una base rígida, para que la vibración de la mesa o del suelo llegue bien al líquido.</li>
+        <li><b>Fija el sensor</b> al borde del recipiente, con las pistas parcialmente sumergidas. Conecta S → A0, + → 5 V y − → GND, compartiendo la tierra con los LEDs.</li>
+        <li><b>Carga el programa.</b> Abre <a class="proy-link" href="https://github.com/alej-gz/sensor-agua/blob/main/sensor_agua.ino" target="_blank" rel="noopener"><code>sensor_agua.ino</code></a> en el Arduino IDE y súbelo a la placa.</li>
+        <li><b>Calibra.</b> Con el agua quieta la lectura varía apenas 0 a 3 unidades. Haz un movimiento de la intensidad que quieres detectar, espera el resumen del monitor serie y escribe el número del nivel (1 a 5). Ese umbral pasa a ser el 80 % de la variación máxima y se guarda en la memoria del Arduino.</li>
+        <li><b>Prueba.</b> Golpea la base una vez suave y otra fuerte, y mira cómo se encienden los LEDs. Para ver las gráficas, conecta la placa con el botón <b>Conectar Arduino</b> de este panel (en Chrome o Edge).</li>
+      </ol>
+
+      <div class="proy-cols">
+        <article class="card">
+          <h4>Consejos</h4>
+          <ul class="proy-ul">
+            <li>Con agua quieta, el ruido normal es de 0 a 3 unidades. Si los LEDs se encienden solos, revisa que la base esté firme.</li>
+            <li>Un zumbador <b>pasivo</b> consume pocos miliamperios. Si usas uno magnético, revisa su hoja de datos o maneja con un transistor.</li>
+            <li>Saca el sensor del agua cuando no lo uses: las pistas expuestas se corroen.</li>
+          </ul>
+        </article>
+        <article class="card">
+          <h4>Seguridad eléctrica</h4>
+          <ul class="proy-ul">
+            <li>Con 220 Ω, cada LED trabaja con <b>9,1 a 13,6 mA</b>, bajo el límite de 20 mA por pin del Arduino.</li>
+            <li>Solo un LED está encendido a la vez, así que el consumo total queda muy por debajo de los 200 mA del microcontrolador.</li>
+            <li>El Arduino puede alimentarse por USB o con una batería de 9 V.</li>
+          </ul>
+        </article>
+      </div>
+
       <h3 class="proy-h">Los 5 niveles de alerta</h3>
       <div class="card proy-niveles">
         <ul class="niv-lista">

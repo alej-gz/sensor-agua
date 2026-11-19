@@ -522,3 +522,26 @@ main { max-width: 1320px; margin: 0 auto; padding: 20px 24px 40px; }
   .bars { gap: 6px; }
   .proy-intro { padding: 20px; }
 }
+
+
+/* ---- Como armarlo ---- */
+.proy-armar h4, .proy-conex h4 { margin: 0 0 10px; font: 700 17px/1.25 var(--display); }
+.proy-h4 { margin: 4px 0 -6px; font: 700 17px/1.25 var(--display); }
+.mats { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 6px 18px; font-size: 14.5px; }
+.mats li { display: flex; align-items: baseline; gap: 10px; padding: 8px 10px; border-radius: 9px; background: var(--surface-2); }
+.mats li b { flex: none; min-width: 34px; text-align: center; padding: 1px 6px; border-radius: 6px; background: var(--accent); color: var(--accent-ink); font-size: 12.5px; }
+.scroll-x { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.proy-conex svg { display: block; width: 100%; min-width: 620px; height: auto; color: var(--text); }
+.armar-pasos { margin: 0; padding: 0; list-style: none; display: grid; gap: 10px; counter-reset: ap; }
+.armar-pasos li {
+  counter-increment: ap; position: relative; padding: 14px 16px 14px 56px; border-radius: var(--radius);
+  background: var(--surface); border: 1px solid var(--line); box-shadow: var(--shadow); font-size: 14.5px; line-height: 1.6; color: var(--muted);
+}
+.armar-pasos li::before {
+  content: counter(ap); position: absolute; left: 14px; top: 12px; width: 30px; height: 30px; border-radius: 50%;
+  display: grid; place-items: center; font: 700 15px/1 var(--display); background: var(--accent); color: var(--accent-ink);
+}
+.armar-pasos b { color: var(--text); }
+.proy-link { color: var(--accent-text); text-underline-offset: 3px; }
+.proy-link code { font-family: var(--mono); font-size: 13.5px; }
+@media (max-width: 640px) { .mats { grid-template-columns: 1fr; } .armar-pasos li { padding-left: 52px; } }

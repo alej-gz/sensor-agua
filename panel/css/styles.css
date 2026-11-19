@@ -758,3 +758,30 @@ html[data-texto-grande] body { zoom: 1.12; }
   .theme-btn { bottom: 84px; right: 16px; width: 40px; height: 40px; }
   main { padding-bottom: 96px; }
 }
+
+
+/* ============ Celular: pestanas en una barra fija abajo, al alcance del pulgar ============ */
+.tab-ico { display: none; }
+@media (max-width: 760px) {
+  .tabs, .topbar:not(.menu-open) .tabs {
+    display: flex !important; position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; order: 0;
+    margin: 0; padding: 4px 6px calc(4px + env(safe-area-inset-bottom)); gap: 4px;
+    background: var(--surface); border: 0; border-top: 1px solid var(--line); border-radius: 0;
+    box-shadow: 0 -10px 30px -18px rgba(0, 0, 0, .6);
+  }
+  .tabs button, .topbar.menu-open .tabs button {
+    flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px;
+    min-height: 56px; padding: 6px 4px; border-radius: 10px; font-size: 12px; line-height: 1.15; text-align: center;
+  }
+  .tab-ico { display: block; }
+  .tabs button[aria-selected="true"] { background: var(--surface-2); color: var(--accent-text); box-shadow: inset 0 3px 0 var(--accent); }
+
+  /* Lo flotante sube para no quedar debajo de la barra */
+  .player { bottom: calc(72px + env(safe-area-inset-bottom)); }
+  .theme-btn { bottom: calc(138px + env(safe-area-inset-bottom)); }
+  main { padding-bottom: 160px; }
+  .pie { padding-bottom: 150px; }
+}
+
+/* La cabecera (y la barra de pestanas que lleva dentro en el celular) va por encima del contenido */
+.topbar { z-index: 40; }

@@ -75,6 +75,7 @@ function iniciarMenu() {
     btn.setAttribute('aria-expanded', String(si));
   };
   btn.addEventListener('click', () => abrir(!barra.classList.contains('menu-open')));
+  document.querySelectorAll('.tabs button').forEach((b) => b.addEventListener('click', () => window.scrollTo({ top: 0 })));
   // Al elegir una opcion del menu, se cierra para que se vea el resultado
   barra.addEventListener('click', (e) => {
     const b = e.target.closest('button, a');

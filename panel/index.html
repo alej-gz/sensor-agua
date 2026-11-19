@@ -61,6 +61,7 @@
       <button id="btn-watch" class="btn" title="Ver lo que transmite el sensor por internet" hidden>Ver en vivo</button>
       <button id="btn-live" class="btn primary" title="Enviar los datos de tu sensor por internet para que todos los vean" hidden>Transmitir en vivo</button>
       <button id="btn-disconnect" class="btn" hidden>Desconectar</button>
+      <button id="btn-share" class="btn" hidden>Compartir</button>
       <button id="btn-qr" class="btn" aria-haspopup="dialog" title="Mostrar el código QR de esta página">Mostrar QR</button>
     </div>
   </header>
@@ -122,6 +123,18 @@
           <article class="card controls">
             <label class="switch"><input type="checkbox" id="opt-sound"><span></span>Alarma sonora en el navegador</label>
             <button id="btn-fullscreen" class="btn">Pantalla completa</button>
+          </article>
+
+          <article class="card leyenda">
+            <span class="eyebrow">¿Qué significa cada nivel?</span>
+            <ul class="ley-lista">
+              <li data-l="1"><i></i><b>1</b> Advertencia leve</li>
+              <li data-l="2"><i></i><b>2</b> Vibración baja</li>
+              <li data-l="3"><i></i><b>3</b> Vibración media</li>
+              <li data-l="4"><i></i><b>4</b> Vibración alta</li>
+              <li data-l="5"><i></i><b>5</b> Muy fuerte, suena el zumbador</li>
+            </ul>
+            <a class="proy-link ley-mas" href="#proyecto">Cómo funciona este sensor &rarr;</a>
           </article>
         </div>
 
@@ -390,6 +403,33 @@
         </ul>
       </div>
 
+      <div class="card proy-galeria">
+        <h4>Mi prototipo</h4>
+        <p class="proy-nota">Así quedó armado. Toca una foto para verla más grande.</p>
+        <div class="galeria">
+          <button type="button" class="foto foto-grande" data-full="img/prototipo-armado.jpg" data-alt="Prototipo armado: el recipiente con el sensor conectado al Arduino UNO, con los LEDs azules encendidos a la izquierda">
+            <img src="img/prototipo-armado.jpg" alt="Prototipo armado: el recipiente con el sensor conectado al Arduino UNO, con los LEDs azules encendidos a la izquierda" width="1200" height="900" loading="lazy">
+            <span>Prototipo funcionando</span>
+          </button>
+          <button type="button" class="foto" data-full="img/prototipo-protoboard.jpg" data-alt="Protoboard del prototipo con los primeros LEDs instalados">
+            <img src="img/prototipo-protoboard.jpg" alt="Protoboard del prototipo con los primeros LEDs instalados" width="900" height="675" loading="lazy">
+            <span>Protoboard con LEDs</span>
+          </button>
+          <button type="button" class="foto" data-full="img/prototipo-sensor.jpg" data-alt="Módulo sensor de nivel de agua con pistas de cobre">
+            <img src="img/prototipo-sensor.jpg" alt="Módulo sensor de nivel de agua con pistas de cobre" width="511" height="681" loading="lazy">
+            <span>Sensor de nivel</span>
+          </button>
+          <button type="button" class="foto" data-full="img/prototipo-sensor-agua.jpg" data-alt="Sensor fijado al recipiente con las pistas parcialmente sumergidas en agua">
+            <img src="img/prototipo-sensor-agua.jpg" alt="Sensor fijado al recipiente con las pistas parcialmente sumergidas en agua" width="639" height="479" loading="lazy">
+            <span>Sensor en el agua</span>
+          </button>
+          <button type="button" class="foto" data-full="img/prototipo-recipiente.jpg" data-alt="Recipiente plástico transparente con su tapa, usado como medio de detección">
+            <img src="img/prototipo-recipiente.jpg" alt="Recipiente plástico transparente con su tapa, usado como medio de detección" width="593" height="445" loading="lazy">
+            <span>Recipiente con tapa</span>
+          </button>
+        </div>
+      </div>
+
       <div class="card proy-conex">
         <h4>Diagrama de conexiones</h4>
         <div class="scroll-x">
@@ -533,6 +573,42 @@
         </article>
       </div>
 
+      <h3 class="proy-h">Palabras clave</h3>
+      <div class="card proy-glosario">
+        <details>
+          <summary>Presión hidrostática</summary>
+          <p>La presión que ejerce un líquido quieto. Aumenta con la profundidad: <i>P = ρ·g·h</i>.</p>
+        </details>
+        <details>
+          <summary>Principio de Pascal</summary>
+          <p>Un cambio de presión en un líquido encerrado llega por igual a todos sus puntos y a las paredes del recipiente.</p>
+        </details>
+        <details>
+          <summary>Sensor de nivel resistivo</summary>
+          <p>Un módulo con pistas de cobre. El agua conduce un poco de corriente: cuantas más pistas mojadas, menos resistencia y más voltaje de salida.</p>
+        </details>
+        <details>
+          <summary>Convertidor analógico-digital (ADC)</summary>
+          <p>Convierte un voltaje de 0 a 5 V en un número entero de 0 a 1023. Cada unidad equivale a unos 4,9 mV.</p>
+        </details>
+        <details>
+          <summary>Variación (ΔN)</summary>
+          <p>La diferencia entre la lectura mayor y la menor en los últimos 0,6 segundos. Con el agua quieta vale casi cero.</p>
+        </details>
+        <details>
+          <summary>Histéresis</summary>
+          <p>Un nivel se apaga cuando la variación baja 3 unidades por debajo de su umbral, no justo en él. Así los LEDs no parpadean.</p>
+        </details>
+        <details>
+          <summary>EEPROM</summary>
+          <p>Memoria del Arduino que no se borra al desconectarlo. Allí se guardan los umbrales calibrados.</p>
+        </details>
+        <details>
+          <summary>Ley de Ohm</summary>
+          <p>Relaciona voltaje, corriente y resistencia: <i>V = I·R</i>. Se usa para calcular cuánta corriente pasa por cada LED.</p>
+        </details>
+      </div>
+
       <p class="proy-fuentes">
         Basado en el informe <i>«Sistema multinivel de detección de vibraciones basado en hidrostática y control óhmico en circuitos»</i> (FIS200, USFX).
         Marco teórico: Young &amp; Freedman, <i>Física universitaria</i>; Serway &amp; Jewett, <i>Física para ciencias e ingeniería</i>; documentación de Arduino UNO.
@@ -540,6 +616,14 @@
       </p>
     </section>
   </main>
+
+  <dialog id="foto-dialog" class="foto-dialog" aria-label="Foto ampliada">
+    <form method="dialog">
+      <img id="foto-img" src="" alt="">
+      <p id="foto-alt"></p>
+      <button class="btn">Cerrar</button>
+    </form>
+  </dialog>
 
   <dialog id="qr-dialog" class="qr-dialog" aria-labelledby="qr-titulo">
     <form method="dialog" class="qr-cuerpo">

@@ -78,6 +78,28 @@ audio.addEventListener('timeupdate', () => {
 audio.addEventListener('ended', () => { pausarUI(); $('pl-prog').style.width = '0%'; });
 
 const pedido = new URLSearchParams(location.search).get('tema');
+// --- Visor de fotos del prototipo ---
+const fd = $('foto-dialog');
+document.querySelectorAll('.foto').forEach((b) => b.addEventListener('click', () => {
+  $('foto-img').src = b.dataset.full;
+  $('foto-img').alt = b.dataset.alt || '';
+  $('foto-alt').textContent = b.dataset.alt || '';
+  if (typeof fd.showModal === 'function') fd.showModal(); else fd.setAttribute('open', '');
+}));
+fd.addEventListener('click', (e) => { if (e.target === fd) fd.close(); });
+
+// --- Compartir (solo donde el navegador lo permite, p. ej. celulares) ---
+const share = $('btn-share');
+if (navigator.share) {
+  share.hidden = false;
+  share.addEventListener('click', () => {
+    navigator.share({ title: 'Indicador de temblores · USFX', text: 'Sensor de nivel de agua con Arduino que detecta temblores, en vivo.', url: 'https://panel-sensor-agua.vercel.app/' }).catch(() => {});
+  });
+}
+
+// El enlace de la leyenda cambia de pestana; al llegar se sube al inicio
+document.querySelectorAll('.ley-mas').forEach((a) => a.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' })));
+
 // --- Ventana con el codigo QR ---
 const dlg = $('qr-dialog');
 $('btn-qr').addEventListener('click', () => { if (typeof dlg.showModal === 'function') dlg.showModal(); else dlg.setAttribute('open', ''); });

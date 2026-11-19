@@ -1,0 +1,14 @@
+# Secretos y archivos locales: nunca se suben
+clave_transmision.txt
+.vercel
+node_modules
+.env
+.env.*
+*.log
+
+# Material que no se publica (derechos de autor / documentos personales)
+panel/audio/
+Guion_presentacion_ingeniero.pdf
+Informe_*.docx
+Reimprimir_*.pdf
+respaldo_informes/

@@ -1,0 +1,9 @@
+{
+  "name": "panel-indicador-temblores",
+  "private": true,
+  "type": "module",
+  "description": "Panel web del indicador de temblores (sensor de nivel de agua + Arduino UNO)",
+  "scripts": {
+    "start": "node server.mjs"
+  }
+}

@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="es" data-theme="dog">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Indicador de temblores · USFX</title>
+  <meta name="description" content="Sensor de nivel de agua con Arduino UNO que detecta temblores, en vivo. Por Paul Alejandro Guzmán Calle · alej-gz.vercel.app">
+  <meta name="author" content="Paul Alejandro Guzmán Calle">
+  <link rel="author" href="https://alej-gz.vercel.app/">
+  <link rel="canonical" href="https://panel-sensor-agua.vercel.app/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="es_BO">
+  <meta property="og:site_name" content="Paul Alejandro Guzmán Calle · alej-gz.vercel.app">
+  <meta property="og:title" content="Indicador de temblores · Universidad San Francisco Xavier">
+  <meta property="og:description" content="Sensor de nivel de agua con Arduino UNO que detecta temblores, en vivo. Hecho por Paul Alejandro Guzmán Calle · alej-gz.vercel.app">
+  <meta property="og:url" content="https://panel-sensor-agua.vercel.app/">
+  <meta property="og:image" content="https://panel-sensor-agua.vercel.app/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Escudo de la USFX con el título Indicador de temblores y la firma de Paul Alejandro Guzmán Calle, alej-gz.vercel.app">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Indicador de temblores · Universidad San Francisco Xavier">
+  <meta name="twitter:description" content="Sensor de nivel de agua con Arduino UNO que detecta temblores, en vivo. Hecho por Paul Alejandro Guzmán Calle · alej-gz.vercel.app">
+  <meta name="twitter:image" content="https://panel-sensor-agua.vercel.app/og-image.png">
+  <meta name="twitter:image:alt" content="Escudo de la USFX con el título Indicador de temblores y la firma de Paul Alejandro Guzmán Calle">
+  <meta name="theme-color" content="#1A0A0A">
+  <link rel="icon" href="favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" sizes="32x32" href="icon-32.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,700;1,400;1,500&display=swap">
+  <link rel="stylesheet" href="css/styles.css">
+  <script type="module" src="js/main.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <img class="brand-logo" src="img/usfx-oscuro.png" alt="Escudo de la Universidad San Francisco Xavier" width="42" height="56">
+      <div>
+        <p class="eyebrow-uni">Universidad San Francisco Xavier</p>
+        <h1>Indicador de temblores</h1>
+        <p class="sub">Sensor de nivel de agua · Arduino UNO</p>
+      </div>
+    </div>
+
+    <nav class="tabs" role="tablist" aria-label="Modo">
+      <button role="tab" id="tab-activo" data-tab="activo" aria-selected="true">Siempre activo</button>
+      <button role="tab" id="tab-prueba" data-tab="prueba" aria-selected="false">Modo prueba</button>
+    </nav>
+
+    <div class="conn">
+      <span id="conn-status" class="pill" data-state="off"><i></i><span>Desconectado</span></span>
+      <button id="btn-connect" class="btn primary">Conectar Arduino</button>
+      <button id="btn-demo" class="btn" title="Datos simulados, sin placa">Demo</button>
+      <button id="btn-watch" class="btn" title="Ver lo que transmite el sensor por internet" hidden>Ver en vivo</button>
+      <button id="btn-live" class="btn primary" title="Enviar los datos de tu sensor por internet para que todos los vean" hidden>Transmitir en vivo</button>
+      <button id="btn-disconnect" class="btn" hidden>Desconectar</button>
+      <button id="btn-qr" class="btn" aria-haspopup="dialog" title="Mostrar el código QR de esta página">Mostrar QR</button>
+    </div>
+  </header>
+
+  <div id="notice" class="notice" role="status" hidden></div>
+
+  <main>
+    <!-- ===================== SIEMPRE ACTIVO ===================== -->
+    <section id="view-activo" class="view" role="tabpanel" aria-labelledby="tab-activo">
+      <div class="activo-grid">
+        <article class="card level-card" id="level-card" data-level="0" data-alarm="0">
+          <div class="level-head">
+            <span class="eyebrow">Intensidad actual</span>
+            <span id="act-state" class="state">Sin conexión</span>
+          </div>
+
+          <div class="level-main">
+            <div class="level-num" id="act-level">–</div>
+            <div class="level-text">
+              <div class="level-name" id="act-level-name">Conecta la placa o abre la demo</div>
+              <div class="level-sub" id="act-level-sub">Nivel 0 a 5 según la variación del agua</div>
+            </div>
+          </div>
+
+          <div class="leds" id="act-leds">
+            <div class="led" data-n="1"><i></i><span>LED 1</span></div>
+            <div class="led" data-n="2"><i></i><span>LED 2</span></div>
+            <div class="led" data-n="3"><i></i><span>LED 3</span></div>
+            <div class="led" data-n="4"><i></i><span>LED 4</span></div>
+            <div class="led alarm" data-n="5"><i></i><span>Buzzer</span></div>
+          </div>
+
+          <div class="meter" aria-hidden="true">
+            <div class="meter-track"><div class="meter-fill" id="act-meter"></div></div>
+            <div class="meter-ticks" id="act-ticks"></div>
+          </div>
+
+          <div class="level-foot">
+            <span>Variación <b id="act-var">–</b></span>
+            <span>Lectura <b id="act-read">–</b></span>
+          </div>
+        </article>
+
+        <div class="side">
+          <article class="card">
+            <span class="eyebrow">Esta sesión</span>
+            <div class="kpis">
+              <div><b id="act-count">0</b><span>temblores</span></div>
+              <div><b id="act-max">–</b><span>nivel máximo</span></div>
+              <div><b id="act-uptime">00:00:00</b><span>tiempo activo</span></div>
+            </div>
+          </article>
+
+          <article class="card">
+            <span class="eyebrow">Último temblor</span>
+            <div id="act-last" class="last empty">Ninguno todavía</div>
+          </article>
+
+          <article class="card controls">
+            <label class="switch"><input type="checkbox" id="opt-sound"><span></span>Alarma sonora en el navegador</label>
+            <button id="btn-fullscreen" class="btn">Pantalla completa</button>
+          </article>
+        </div>
+
+        <article class="card history">
+          <div class="card-head">
+            <span class="eyebrow">Historial de temblores</span>
+            <button id="btn-clear-history" class="btn small ghost">Borrar historial</button>
+          </div>
+          <ol id="act-history" class="history-list"></ol>
+          <p id="act-history-empty" class="muted">Aún no hay temblores registrados.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- ===================== MODO PRUEBA ===================== -->
+    <section id="view-prueba" class="view" role="tabpanel" aria-labelledby="tab-prueba" hidden>
+      <div class="card toolbar">
+        <div class="seg" id="win-seg" role="group" aria-label="Ventana de tiempo">
+          <button data-win="10">10 s</button>
+          <button data-win="30" aria-pressed="true">30 s</button>
+          <button data-win="60">60 s</button>
+          <button data-win="120">120 s</button>
+        </div>
+        <button id="btn-pause" class="btn">Pausar gráficas</button>
+        <span class="divider"></span>
+        <button id="btn-rec" class="btn rec"><i></i>Grabar</button>
+        <span id="rec-info" class="muted">Sin grabación</span>
+        <button id="btn-export-rec" class="btn" disabled>Exportar CSV</button>
+        <span class="grow"></span>
+        <div id="demo-tools" class="demo-tools" hidden>
+          <span class="muted">Simular temblor:</span>
+          <button class="btn small" data-sim="1">Muy leve</button>
+          <button class="btn small" data-sim="3">Moderado</button>
+          <button class="btn small" data-sim="5">Muy fuerte</button>
+        </div>
+      </div>
+
+      <div class="prueba-grid">
+        <article class="card chart-card span-2">
+          <div class="card-head">
+            <span class="eyebrow">Lectura del sensor (A0, 0–1023)</span>
+            <span class="legend"><i class="sw read"></i>lectura</span>
+          </div>
+          <canvas id="chart-read" aria-label="Gráfica de la lectura del sensor"></canvas>
+        </article>
+
+        <article class="card chart-card span-2">
+          <div class="card-head">
+            <span class="eyebrow">Variación (mayor entre rango y actividad en la ventana)</span>
+            <span class="legend"><i class="sw var"></i>variación <i class="sw dash"></i>umbrales N1–N5 <span class="muted" id="win-info"></span></span>
+          </div>
+          <canvas id="chart-var" aria-label="Gráfica de la variación con umbrales"></canvas>
+        </article>
+
+        <article class="card">
+          <span class="eyebrow">Estadísticas de la ventana visible</span>
+          <dl class="stats" id="stats">
+            <dt>Muestreo</dt><dd id="st-rate">–</dd>
+            <dt>Muestras</dt><dd id="st-n">–</dd>
+            <dt>Lectura mín / máx</dt><dd id="st-minmax">–</dd>
+            <dt>Lectura media</dt><dd id="st-mean">–</dd>
+            <dt>Desviación estándar</dt><dd id="st-sd">–</dd>
+            <dt>Variación media / máx</dt><dd id="st-var">–</dd>
+            <dt>Nivel actual</dt><dd id="st-level">–</dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <div class="card-head">
+            <span class="eyebrow">Tiempo en cada nivel</span>
+            <button id="btn-reset-levels" class="btn small ghost">Reiniciar</button>
+          </div>
+          <div id="level-bars" class="level-bars"></div>
+        </article>
+
+        <article class="card config">
+          <span class="eyebrow">Umbrales de variación (en la placa)</span>
+          <div class="th-grid" id="th-grid">
+            <label><span>N1</span><input type="number" min="1" max="1023" id="th-1"></label>
+            <label><span>N2</span><input type="number" min="1" max="1023" id="th-2"></label>
+            <label><span>N3</span><input type="number" min="1" max="1023" id="th-3"></label>
+            <label><span>N4</span><input type="number" min="1" max="1023" id="th-4"></label>
+            <label><span>N5</span><input type="number" min="1" max="1023" id="th-5"></label>
+          </div>
+          <p class="muted small" id="th-meta">Histéresis y ventana: –</p>
+          <div class="btn-row">
+            <button id="btn-th-send" class="btn primary small">Enviar a la placa</button>
+            <button id="btn-th-read" class="btn small">Leer</button>
+            <button id="btn-th-reset" class="btn small ghost">Valores por defecto</button>
+          </div>
+          <p class="small" id="th-msg" role="status"></p>
+
+          <div class="sound-opt">
+            <span class="eyebrow">Sonido de la alarma máxima (en la placa)</span>
+            <label class="switch"><input type="checkbox" id="opt-melody" disabled><span></span>Tocar la melodía en lugar del pitido</label>
+            <p class="muted small" id="melody-msg" role="status">Conecta la placa para elegir el sonido.</p>
+          </div>
+        </article>
+
+        <article class="card span-3">
+          <div class="card-head">
+            <span class="eyebrow">Temblores de esta sesión</span>
+            <button id="btn-export-tremors" class="btn small" disabled>Exportar CSV</button>
+          </div>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>#</th><th>Hora</th><th>Duración</th><th>Oscilaciones</th><th>Osc/s</th>
+                  <th>Nivel máx</th><th>Variación máx</th><th>Lectura mín</th><th>Lectura máx</th>
+                </tr>
+              </thead>
+              <tbody id="tremor-rows"></tbody>
+            </table>
+          </div>
+          <p id="tremor-empty" class="muted">Sin temblores en esta sesión.</p>
+        </article>
+
+        <article class="card span-3 console">
+          <div class="card-head">
+            <span class="eyebrow">Consola serie</span>
+            <button id="btn-clear-log" class="btn small ghost">Limpiar</button>
+          </div>
+          <pre id="log" class="log" aria-live="off"></pre>
+          <form id="cmd-form" class="cmd">
+            <input id="cmd-input" autocomplete="off" placeholder="Comando para la placa: v, r, s, h, u10,16,23,31,40 …">
+            <button class="btn small">Enviar</button>
+          </form>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <dialog id="qr-dialog" class="qr-dialog" aria-labelledby="qr-titulo">
+    <form method="dialog" class="qr-cuerpo">
+      <h2 id="qr-titulo">Escanea para ver el sensor en vivo</h2>
+      <img src="img/qr.png" alt="Código QR que abre https://panel-sensor-agua.vercel.app" width="320" height="320">
+      <p class="qr-url" id="qr-url">panel-sensor-agua.vercel.app</p>
+      <div class="qr-acciones">
+        <button type="button" class="btn primary" id="qr-copiar">Copiar enlace</button>
+        <a class="btn" href="img/qr-tarjeta.png" download="qr-indicador-de-temblores.png">Descargar tarjeta</a>
+        <button class="btn ghost" value="cerrar">Cerrar</button>
+      </div>
+    </form>
+  </dialog>
+
+  <footer class="pie">
+    <a class="firma" href="https://alej-gz.vercel.app/" target="_blank" rel="noopener" aria-label="Paul Alejandro Guzmán Calle: ir a mi página">
+      <img src="img/firma.png" alt="Firma de Paul Alejandro Guzmán Calle" width="260" height="221" loading="lazy">
+    </a>
+    <p class="pie-nombre">Paul Alejandro Guzmán Calle</p>
+    <a class="mylink pie-link" href="https://alej-gz.vercel.app/" target="_blank" rel="noopener">alej-gz.vercel.app &rarr;</a>
+    <a class="pie-ig" href="https://instagram.com/alej_gzm.c" target="_blank" rel="noopener" aria-label="Instagram de Paul Alejandro Guzmán Calle: @alej_gzm.c">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/></svg>
+      <span>@alej_gzm.c</span>
+    </a>
+  </footer>
+  <div class="particulas" id="particulas" aria-hidden="true"></div>
+  <button class="theme-btn" id="theme-btn" aria-label="Cambiar tema">&#9993;&#65039;</button>
+  <div class="player" id="player" role="group" aria-label="Música de fondo">
+    <button id="pl-btn" aria-label="Reproducir">
+      <svg id="pl-ico" viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+    </button>
+    <div class="pl-text">
+      <div class="pl-kicker">now playing...</div>
+      <div class="pl-title" id="pl-title">listening: garden</div>
+      <div class="pl-bar"><i id="pl-prog"></i></div>
+    </div>
+    <audio id="pl-audio" preload="none"></audio>
+  </div>
+</body>
+</html>

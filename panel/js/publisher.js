@@ -2,7 +2,7 @@
 // Solo funciona con la clave de transmision (la define quien publica el panel en Vercel).
 
 const CLAVE_LS = 'sensorAgua.clave';
-const ENVIO_MS = 500;
+const ENVIO_MS = 1000;   // un lote por segundo: la mitad de escrituras en Redis que con 500 ms
 
 export class Publicador extends EventTarget {
   activo = false;

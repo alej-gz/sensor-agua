@@ -16,3 +16,7 @@ qr_panel*.png
 panel/server.mjs
 panel/package.json
 panel/audio
+docs
+assets
+firmware
+herramientas

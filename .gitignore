@@ -20,3 +20,6 @@ respaldo_informes/
 app-escritorio/node_modules/
 app-escritorio/dist/
 *.exe
+
+# Documentos personales (guiones, informes, stand): solo local
+docs/

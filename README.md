@@ -10,11 +10,15 @@ Hecho por Paul Alejandro Guzmán Calle · https://alej-gz.vercel.app
 
 | Ruta | Qué es |
 |---|---|
-| `sensor_agua.ino` | Sketch del Arduino UNO (niveles 1 a 5, buzzer, detector de temblor). |
+| `firmware/sensor_agua/` | Sketch del Arduino UNO (niveles 1 a 5, buzzer, detector de temblor). |
 | `panel/` | Panel web (HTML, CSS y JS sin dependencias) + funciones de Vercel. |
 | `panel/api/` | `publicar` (recibe los datos del presentador, protegido con clave) y `estado` (los entrega a los visitantes). |
-| `monitor.ps1`, `Abrir monitor.bat` | Monitor serie simple para probar la placa. |
-| `qr_panel_*.png` | Códigos QR del panel. |
+| `app-escritorio/` | App de escritorio (Electron) que abre el panel. |
+| `herramientas/monitor/` | Monitor serie simple para probar la placa. |
+| `assets/qr/` | Códigos QR del panel. |
+| `Abrir panel.bat` | Abre el panel en local. |
+
+Los guiones, informes y material del stand viven solo en local (`docs/`, no se publican).
 
 ## Cómo funciona la transmisión en vivo
 
